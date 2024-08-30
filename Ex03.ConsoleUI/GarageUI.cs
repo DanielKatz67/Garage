@@ -76,14 +76,14 @@ public class GarageUI
         StringBuilder menuBuilder = new StringBuilder();
 
         menuBuilder.AppendLine($"Please select one of the options below (Choose 1-{m_MenuActions.Count}):");
-        menuBuilder.AppendLine("1. Enter a new vehicle to the garage");
-        menuBuilder.AppendLine("2. Show plates list by filter");
+        menuBuilder.AppendLine("1. Enter a vehicle to the garage");
+        menuBuilder.AppendLine("2. Show license plates by status");
         menuBuilder.AppendLine("3. Change vehicle status");
-        menuBuilder.AppendLine("4. Inflate vehicle tires to the maximum");
-        menuBuilder.AppendLine("5. Refuel fuel-powered vehicle");
-        menuBuilder.AppendLine("6. Charge an electric vehicle");
-        menuBuilder.AppendLine("7. Show vehicle info by its plate");
-        menuBuilder.AppendLine("8. Quit");
+        menuBuilder.AppendLine("4. Inflate wheels to maximum");
+        menuBuilder.AppendLine("5. Refuel");
+        menuBuilder.AppendLine("6. Charge");
+        menuBuilder.AppendLine("7. Show vehicle full details by license plate");
+        menuBuilder.AppendLine("8. Exit");
         menuBuilder.AppendLine();
         menuBuilder.AppendLine($"Enter your choice from the following (1-{m_MenuActions.Count}):");
 
