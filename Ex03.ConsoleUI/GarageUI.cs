@@ -153,13 +153,23 @@ public class GarageUI
             else if (vehicleType == eVehicleType.Motorcycle)
             {
                 eMotorcycleLicenseType licenseType = readLicenseType();
-                this.userReadEngineCapacity(vehicleToEnter);
+                int engineCapacity = readEngineCapacity();
+                vehicle = new Motorcycle(licensePlate, model, wheelsManufacture, licenseType,
+                    engineCapacity, energyType, remainingEnergyPrecentage, fuelType,
+                    maximalTankCapacity, maximalChargeCapacity, owner
+                );
             }
             
             this.r_Garage.EnterVehicleToGarage(vehicle);
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
+    }
+    
+    private int readEngineCapacity()
+    {
+        Console.WriteLine("Enter engine capacity:");
+        return int.Parse(Console.ReadLine());
     }
     
     private eMotorcycleLicenseType readLicenseType()
