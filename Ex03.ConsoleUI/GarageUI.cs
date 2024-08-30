@@ -143,7 +143,7 @@ public class GarageUI
             }
             else if (vehicleType == eVehicleType.Truck)
             {
-                this.userReadIsContainHazardousMaterials(vehicleToEnter);
+                this.readIsContainHazardousMaterials(vehicleToEnter);
                 this.userReadTrunkCapacity(vehicleToEnter);
             }
             else if (vehicleType == eVehicleType.Motorcycle)
@@ -153,12 +153,23 @@ public class GarageUI
             }
             
             // TODO: Initialize vehicle
-            this.r_Garage.EnterVehicleToGarage(vehicleToEnter);
+            this.r_Garage.EnterVehicleToGarage(vehicle);
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
     }
 
+    private bool readIsContainHazardousMaterials()
+    {
+        Console.WriteLine($"Is the truck carry hazardous materials? (Choose: 1 or 2)" +
+                                    $"1.Yes" +
+                                    $"2.No" 
+                                    );
+        int isContainHazardous = int.Parse(Console.ReadLine());
+
+        return (isContainHazardous == 1);
+    }
+    
     private float? readHourlyMaximalChargeCapacity()
     {
         Console.WriteLine("Enter hourly maximal charge capacity:");
