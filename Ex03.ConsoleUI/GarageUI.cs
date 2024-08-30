@@ -150,7 +150,7 @@ public class GarageUI
                     maximalTankCapacity, owner
                 );
             }
-            else if (vehicleType == eVehicleType.Motorcycle)
+            else
             {
                 eMotorcycleLicenseType licenseType = readLicenseType();
                 int engineCapacity = readEngineCapacity();
@@ -160,7 +160,7 @@ public class GarageUI
                 );
             }
             
-            this.r_Garage.EnterVehicleToGarage(vehicle);
+            r_Garage.AssignNewVehicle(vehicle.LicenseLicensePlate, vehicle, eVehicleStatus.InRepair);
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
