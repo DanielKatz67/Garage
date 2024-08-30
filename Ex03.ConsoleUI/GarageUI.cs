@@ -1,17 +1,19 @@
 using System.Text;
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI;
 
 public class GarageUI
 {
     private bool m_IsRunning;
-    private Dictionary<eMenuChoices, Action> m_MenuActions;
+    private readonly Garage r_Garage;
+    private readonly Dictionary<eMenuChoices, Action> r_MenuActions;
 
     public GarageUI()
     {
         m_IsRunning = true;
-
-        m_MenuActions = new Dictionary<eMenuChoices, Action>
+        r_Garage = new Garage();
+        r_MenuActions = new Dictionary<eMenuChoices, Action>
         {
             { eMenuChoices.InsertVehicle, this.insertVehicleToGarage },
             { eMenuChoices.ShowLicensePlates, this.showLicensePlates },
@@ -34,11 +36,11 @@ public class GarageUI
                 showMenu();
                 if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice))
                 {
-                    m_MenuActions[userChoice].Invoke();
+                    r_MenuActions[userChoice].Invoke();
                 }
                 else
                 {
-                    Console.WriteLine($"Inserted invalid choice, Please enter a number between 1-{m_MenuActions.Count}");
+                    Console.WriteLine($"Inserted invalid choice, Please enter a number between 1-{r_MenuActions.Count}");
                 }
             }
 
@@ -84,7 +86,7 @@ public class GarageUI
     {
         StringBuilder menuBuilder = new StringBuilder();
 
-        menuBuilder.AppendLine($"Please select one of the options below (Choose 1-{m_MenuActions.Count}):");
+        menuBuilder.AppendLine($"Please select one of the options below (Choose 1-{r_MenuActions.Count}):");
         menuBuilder.AppendLine("1. Enter a vehicle to the garage");
         menuBuilder.AppendLine("2. Show license plates by status");
         menuBuilder.AppendLine("3. Change vehicle status");
@@ -94,16 +96,26 @@ public class GarageUI
         menuBuilder.AppendLine("7. Show vehicle full details by license plate");
         menuBuilder.AppendLine("8. Exit");
         menuBuilder.AppendLine();
-        menuBuilder.AppendLine($"Enter your choice from the following (1-{m_MenuActions.Count}):");
+        menuBuilder.AppendLine($"Enter your choice from the following (1-{r_MenuActions.Count}):");
 
         Console.WriteLine(menuBuilder);
     }
     
     private void insertVehicleToGarage()
     {
-        Console.WriteLine("insertVehicleToGarage");
+        string licensePlate = readLicensePlate();
+        if (expr)
+        {
+            
+        }
     }
 
+    private string readLicensePlate()
+    {
+        Console.WriteLine("Enter Plate id:");
+        return Console.ReadLine();
+    }
+    
     private void showLicensePlates()
     {
         Console.WriteLine("showLicensePlates");
