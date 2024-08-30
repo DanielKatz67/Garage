@@ -380,7 +380,8 @@ public class GarageUI
 
     private void inflateWheelsToMax()
     {
-        Console.WriteLine("inflateWheelsToMax");
+        string licensePlate = readLicensePlate();
+        r_Garage.InflateWheelToMax(licensePlate);
     }
 
     private void refuelVehicle()
