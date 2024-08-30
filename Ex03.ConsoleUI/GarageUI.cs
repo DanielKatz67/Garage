@@ -43,7 +43,6 @@ public class GarageUI
                     Console.WriteLine($"Inserted invalid choice, Please enter a number between 1-{r_MenuActions.Count}");
                 }
             }
-
         }
         catch (Exception e)
         {
@@ -103,6 +102,7 @@ public class GarageUI
     
     private void insertVehicleToGarage()
     {
+        eEnergySourceType sourceType;
         string licensePlate = readLicensePlate();
         if (r_Garage.IsVehicleExists(licensePlate))
         {
@@ -111,9 +111,108 @@ public class GarageUI
         }
         else
         {
+            eVehicleType vehicleType = this.readVehicleType();
+            if (vehicleType == eVehicleType.Car || vehicleType == eVehicleType.Motorcycle)
+            {
+                sourceType = this.readEnergyType();
+            }
+            else
+            {
+                sourceType = eEnergySourceType.Fuel;
+            }
+
+            float remaimingEnergyPrecentage = this.readRemaimingEnergyPrecentage();
+            VehicleOwner owner = new VehicleOwner();
+            readOwnerDetails(owner);
+            string model = userReadModel(vehicleToEnter);
+            userReadWheelsInteraction(vehicleToEnter);
+ 
+            if (vehicleType == eVehicleType.Car)
+            {
+                this.userReadCarColor(vehicleToEnter);
+                this.userReadDoorsNumber(vehicleToEnter);
+            }
+            else if (vehicleType == eVehicleType.Truck)
+            {
+                this.userReadIsContainHazardousMaterials(vehicleToEnter);
+                this.userReadTrunkCapacity(vehicleToEnter);
+            }
+            else if (vehicleType == eVehicleType.Motorcycle)
+            {
+                this.userReadLicenseType(vehicleToEnter);
+                this.userReadEngineCapacity(vehicleToEnter);
+            }
             
+            // TODO: Initialize vehicle
+            this.r_Garage.EnterVehicleToGarage(vehicleToEnter);
+            Console.Clear();
+            Console.WriteLine("The vehicle now is in the Garage");
         }
     }
+    
+    private void readOwnerDetails(VehicleOwner i_Owner)
+    {
+        Console.WriteLine("Enter vehicle owner name:");
+        i_Owner.Name = Console.ReadLine();
+        Console.WriteLine("Enter vehicle owner phone:");
+        i_Owner.PhoneNumber = Console.ReadLine();
+    }
+    
+    private eEnergySourceType readEnergyType()
+    {
+        Console.WriteLine(string.Format(@"Choose energy source type: (1 or 2)
+1.Electric
+2.Fuel-powered
+"));
+        return this.ParseEnum<eEnergySourceType>(Console.ReadLine());
+    }
+    
+    private float readRemaimingEnergyPrecentage()
+    {
+        Console.WriteLine("The percent of energy in the vehicle (Format of: <0-100%>):");
+        string leftString = Console.ReadLine();
+        if (leftString[leftString.Length - 1] == '%')
+        {
+            float leftPercentsFloat = float.Parse(leftString.Substring(0, leftString.Length - 1));
+            if (leftPercentsFloat <= 100.0F && leftPercentsFloat >= 0.0F)
+            {
+                return leftPercentsFloat;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(0.0F, 100.0F);
+            }
+        }
+        throw new FormatException("The number you enterd should end with %  ");
+    }
+
+    
+    private T ParseEnum<T>(string i_String)
+    {
+        if (Enum.IsDefined(typeof(T), int.Parse(i_String)))
+        {
+            return (T)Enum.ToObject(typeof(T), int.Parse(i_String));
+        }
+        else if (Enum.IsDefined(typeof(T), i_String))
+        {
+            return (T)Enum.Parse(typeof(T), i_String, true);
+        }
+        else
+        {
+            throw new FormatException();
+        }
+    }
+    
+    private eVehicleType readVehicleType()
+    {
+        Console.WriteLine($"Enter the vehicle type:" +
+                          $"1.Motorcycle" +
+                          $"2.Car" +
+                          $"3.Truck");
+        
+        return this.ParseEnum<eVehicleType>(Console.ReadLine());
+    }
+
 
     private string readLicensePlate()
     {
