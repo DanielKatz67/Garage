@@ -7,4 +7,12 @@ public class GarageUI
     {
         
     }
+    
+    private void insertVehicleToGarage() { /* ... */ }
+    private void showLicensePlates() { /* ... */ }
+    private void changeVehicleStatus() { /* ... */ }
+    private void inflateWheelsToMax() { /* ... */ }
+    private void refuelVehicle() { /* ... */ }
+    private void chargeVehicleBattery() { /* ... */ }
+    private void showVehicleFullDetails() { /* ... */ }
 }
