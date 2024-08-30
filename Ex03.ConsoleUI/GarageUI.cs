@@ -130,7 +130,7 @@ public class GarageUI
  
             if (vehicleType == eVehicleType.Car)
             {
-                this.userReadCarColor(vehicleToEnter);
+                this.readCarColor(vehicleToEnter);
                 this.userReadDoorsNumber(vehicleToEnter);
             }
             else if (vehicleType == eVehicleType.Truck)
@@ -149,6 +149,19 @@ public class GarageUI
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
+    }
+    
+    private eCarColor readCarColor(Vehicle i_Vehicle)
+    {
+        Car car = i_Vehicle as Car;
+        Console.WriteLine($"Enter the car color:" +
+                            $"1. Red" +
+                            $"2. Blue" +
+                            $"3. Black"+
+                            $"4. Gray"
+                        );
+     
+        return ParseEnum<eCarColor>(Console.ReadLine());
     }
     
     private float readCurrentAirPressure()
