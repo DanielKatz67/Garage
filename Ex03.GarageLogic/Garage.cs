@@ -60,6 +60,8 @@ public class Garage
 
     public Vehicle GetVehicleDetails(string i_LicensePlate)
     {
+        GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
+        return garageRegistry.RegisteredVehcle;
     }
     
     private GarageRegistry getRegistry(string i_LicensePlate)
