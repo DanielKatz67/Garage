@@ -134,7 +134,7 @@ public class GarageUI
             
             if (vehicleType == eVehicleType.Car)
             {
-                eCarColor color = this.readCarColor();
+                eCarColor color = readCarColor();
                 eCarDoorCount doorCount = this.readDoorsNumber();
                 vehicle = new Car(licensePlate, model, wheelsManufacture, color,
                     doorCount, energyType, remainingEnergyPrecentage, fuelType,
@@ -152,16 +152,27 @@ public class GarageUI
             }
             else if (vehicleType == eVehicleType.Motorcycle)
             {
-                this.userReadLicenseType(vehicleToEnter);
+                eMotorcycleLicenseType licenseType = readLicenseType();
                 this.userReadEngineCapacity(vehicleToEnter);
             }
             
-            // TODO: Initialize vehicle
             this.r_Garage.EnterVehicleToGarage(vehicle);
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
     }
+    
+    private eMotorcycleLicenseType readLicenseType()
+    {
+        Console.WriteLine($"Enter motorcycle license type:" +
+                                    $"1. A1" +
+                                    $"2. A2" + 
+                                    $"3. AB" +
+                                    $"4. B"
+        );
+        return ParseEnum<eMotorcycleLicenseType>(Console.ReadLine());
+    }
+
     
     private float readTrunkCapacity()
     {
