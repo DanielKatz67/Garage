@@ -104,7 +104,12 @@ public class GarageUI
     private void insertVehicleToGarage()
     {
         string licensePlate = readLicensePlate();
-        if (expr)
+        if (r_Garage.IsVehicleExists(licensePlate))
+        {
+            Console.WriteLine("This vehicle already exists, updating status to In Repair");
+            r_Garage.SetStatus(licensePlate, eVehicleStatus.InRepair);
+        }
+        else
         {
             
         }

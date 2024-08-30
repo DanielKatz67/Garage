@@ -16,7 +16,7 @@ public class Garage
         r_LicensePlateToRegistry[i_LicensePlate] = new GarageRegistry(i_Vehicle, i_Status);
     }
 
-    public bool VehicleExists(string i_LicensePlate)
+    public bool IsVehicleExists(string i_LicensePlate)
     {
         return r_LicensePlateToRegistry.ContainsKey(i_LicensePlate);
     }
