@@ -386,7 +386,17 @@ public class GarageUI
 
     private void refuelVehicle()
     {
-        Console.WriteLine(refuelVehicle);
+        string licensePlate = readLicensePlate();
+        Console.WriteLine("Enter fuel amount to fill:");
+        float fuelAmount = float.Parse(Console.ReadLine());
+        Console.WriteLine(@"Enter fuel type:
+1. Soler
+2. Octan95
+3. Octan96
+4. Octan98
+");
+        eFuelType fuelType = ParseEnum<eFuelType>(Console.ReadLine());
+        r_Garage.RefuelVehicle(licensePlate, fuelType, fuelAmount);
     }
 
     private void chargeVehicleBattery()
