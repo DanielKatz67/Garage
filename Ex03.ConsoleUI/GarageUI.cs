@@ -170,10 +170,10 @@ public class GarageUI
                                     $"3. AB" +
                                     $"4. B"
         );
+        
         return ParseEnum<eMotorcycleLicenseType>(Console.ReadLine());
     }
 
-    
     private float readTrunkCapacity()
     {
         Console.WriteLine("Enter truck's trunk capacity :");
@@ -234,10 +234,10 @@ public class GarageUI
     private eCarColor readCarColor()
     {
         Console.WriteLine($"Enter the car color:" +
-                            $"1. Red" +
-                            $"2. Blue" +
+                            $"1. Blue" +
+                            $"2. White" +
                             $"3. Black"+
-                            $"4. Gray"
+                            $"4. Red"
                         );
      
         return ParseEnum<eCarColor>(Console.ReadLine());
@@ -277,7 +277,7 @@ public class GarageUI
     {
         Console.WriteLine($"Choose energy source type: (1 or 2)" +
                           $"1.Electric" +
-                          $"2.Fuel-powered"
+                          $"2.Fuel"
         );
         
         return this.ParseEnum<eEnergySourceType>(Console.ReadLine());
@@ -320,9 +320,9 @@ public class GarageUI
     private eVehicleType readVehicleType()
     {
         Console.WriteLine($"Enter the vehicle type:" +
-                          $"1.Motorcycle" +
-                          $"2.Car" +
-                          $"3.Truck");
+                          $"1. Motorcycle" +
+                          $"2. Car" +
+                          $"3. Truck");
         
         return this.ParseEnum<eVehicleType>(Console.ReadLine());
     }
