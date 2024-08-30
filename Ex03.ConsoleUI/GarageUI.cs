@@ -46,8 +46,7 @@ public class GarageUI
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            Console.WriteLine(e.Message);
         }
     }
 
