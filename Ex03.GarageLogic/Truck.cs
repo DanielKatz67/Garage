@@ -12,7 +12,7 @@ public class Truck : Vehicle
     public Truck(string i_LicensePlate, string i_ModelName, string i_WheelsManufacturer, 
         bool i_IsCarryingDangerousMaterials, float i_TrunkCargoVolume, 
         eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity,
-        eFuelType i_FuelType, float i_MaximalFuelTankCapacity, VehicleOwner i_VehicleOwner)
+        eFuelType i_FuelType, float? i_MaximalFuelTankCapacity, VehicleOwner i_VehicleOwner)
         : base(i_LicensePlate, k_WheelsNumberInTruck, i_ModelName, i_WheelsManufacturer, 
             k_MaximumWheelsAirPressure, i_CurrentEnergySourceCapacity,
             i_EnergySourceType, i_CurrentEnergySourceCapacity, i_FuelType, 
