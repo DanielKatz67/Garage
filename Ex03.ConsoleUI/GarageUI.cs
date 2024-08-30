@@ -24,7 +24,25 @@ public class GarageUI
     
     public void Run()
     {
-
+        while (m_IsRunning)
+        {
+            try
+            {
+                eMenuChoices userChoice = this.ParseEnum<eMenuChoices>(Console.ReadLine());
+                if (m_MenuActions.ContainsKey(userChoice))
+                {
+                    m_MenuActions[userChoice].Invoke();
+                }
+                else
+                {
+                    Console.WriteLine("Inserted invalid choice, Please enter a number between 1-8");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
     }
     
     private T ParseEnum<T>(string i_String)
