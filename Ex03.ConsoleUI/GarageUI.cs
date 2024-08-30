@@ -30,7 +30,7 @@ public class GarageUI
         while (m_IsRunning)
         {
             showMenu();
-            if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice) && m_MenuActions.ContainsKey(userChoice))
+            if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice))
             {
                 m_MenuActions[userChoice].Invoke();
             }
