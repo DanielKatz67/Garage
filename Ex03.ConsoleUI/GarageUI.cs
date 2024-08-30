@@ -401,7 +401,10 @@ public class GarageUI
 
     private void chargeVehicleBattery()
     {
-        Console.WriteLine("chargeVehicleBattery");
+        string licensePlate = readLicensePlate();
+        Console.WriteLine("How many hours?");
+        float hoursToCharge = float.Parse(Console.ReadLine());
+        r_Garage.Charge(licensePlate, hoursToCharge);
     }
 
     private void showVehicleFullDetails()
