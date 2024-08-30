@@ -121,7 +121,7 @@ public class GarageUI
                 sourceType = eEnergySourceType.Fuel;
             }
 
-            float remaimingEnergyPrecentage = this.readRemaimingEnergyPrecentage();
+            float remainingEnergyPrecentage = readRemainingEnergyPrecentage();
             VehicleOwner owner = new VehicleOwner();
             assignOwnerDetails(owner);
             string model = readModel();
@@ -202,21 +202,19 @@ public class GarageUI
         return this.ParseEnum<eEnergySourceType>(Console.ReadLine());
     }
     
-    private float readRemaimingEnergyPrecentage()
+    private float readRemainingEnergyPrecentage()
     {
         Console.WriteLine("The percent of energy in the vehicle (Format of: <0-100%>):");
-        string leftString = Console.ReadLine();
-        if (leftString[leftString.Length - 1] == '%')
+        string remainingPrecentage = Console.ReadLine();
+        if (remainingPrecentage[remainingPrecentage.Length - 1] == '%')
         {
-            float leftPercentsFloat = float.Parse(leftString.Substring(0, leftString.Length - 1));
+            float leftPercentsFloat = float.Parse(remainingPrecentage.Substring(0, remainingPrecentage.Length - 1));
             if (leftPercentsFloat <= 100.0F && leftPercentsFloat >= 0.0F)
             {
                 return leftPercentsFloat;
             }
-            else
-            {
-                throw new ValueOutOfRangeException(0.0F, 100.0F);
-            }
+
+            throw new ValueOutOfRangeException(0.0F, 100.0F);
         }
         throw new FormatException("The number you enterd should end with %  ");
     }
