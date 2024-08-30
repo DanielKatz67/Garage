@@ -26,6 +26,7 @@ public class GarageUI
     
     public void Run()
     {
+        showWelcomeMessage();
         while (m_IsRunning)
         {
             showMenu();
@@ -59,6 +60,16 @@ public class GarageUI
         return false;
     }
 
+    private void showWelcomeMessage()
+    {
+        StringBuilder welcomeBuilder = new StringBuilder();
+        welcomeBuilder.AppendLine("********************************************");
+        welcomeBuilder.AppendLine("** Welcome to the Ultimate Garage Manager! **");
+        welcomeBuilder.AppendLine("********************************************");
+        welcomeBuilder.AppendLine("We are here to help you manage your vehicles efficiently and effectively.");
+        welcomeBuilder.AppendLine();
+    }
+    
     private void showMenu()
     {
         StringBuilder menuBuilder = new StringBuilder();
