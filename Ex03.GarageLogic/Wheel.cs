@@ -6,6 +6,22 @@ public class Wheel
     private readonly float r_MaximumAirPressure;
     private float m_CurrentAirPressure;
 
+    public float MaximumAirPressure
+    {
+        get
+        {
+            return r_MaximumAirPressure;
+        }
+    }
+    
+    public float CurrentAirPressure
+    {
+        get
+        {
+            return m_CurrentAirPressure;
+        }
+    }
+    
     public Wheel(string i_Manufacturer, float i_MaximumAirPressure, float i_CurrentAirPressure)
     {
         r_Manufacturer = i_Manufacturer;
@@ -27,7 +43,6 @@ public class Wheel
 
     public override string ToString()
     {
-        return $"Wheel information: " +
-               $"Manufacture Name: {r_Manufacturer}, Max Air Pressure: {r_MaximumAirPressure}, Current Air Pressure: {m_CurrentAirPressure}";
+        return $"Manufacture Name: {r_Manufacturer}, Max Air Pressure: {r_MaximumAirPressure}, Current Air Pressure: {m_CurrentAirPressure}";
     }
 }
