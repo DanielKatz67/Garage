@@ -67,7 +67,8 @@ public class GarageUI
         welcomeBuilder.AppendLine("** Welcome to the Ultimate Garage Manager! **");
         welcomeBuilder.AppendLine("********************************************");
         welcomeBuilder.AppendLine("We are here to help you manage your vehicles efficiently and effectively.");
-        welcomeBuilder.AppendLine();
+
+        Console.WriteLine(welcomeBuilder);
     }
     
     private void showMenu()
