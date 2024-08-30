@@ -194,10 +194,11 @@ public class GarageUI
     
     private eEnergySourceType readEnergyType()
     {
-        Console.WriteLine(string.Format(@"Choose energy source type: (1 or 2)
-1.Electric
-2.Fuel-powered
-"));
+        Console.WriteLine($"Choose energy source type: (1 or 2)" +
+                          $"1.Electric" +
+                          $"2.Fuel-powered"
+        );
+        
         return this.ParseEnum<eEnergySourceType>(Console.ReadLine());
     }
     
