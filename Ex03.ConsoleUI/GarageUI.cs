@@ -15,13 +15,13 @@ public class GarageUI
         r_Garage = new Garage();
         r_MenuActions = new Dictionary<eMenuChoices, Action>
         {
-            { eMenuChoices.InsertVehicle, this.insertVehicleToGarage },
-            { eMenuChoices.ShowLicensePlates, this.showLicensePlates },
-            { eMenuChoices.ChangeVehicleStatus, this.updateVehicleStatus },
-            { eMenuChoices.InflateWheelsToMax, this.inflateWheelsToMax },
-            { eMenuChoices.Refuel, this.refuelVehicle },
-            { eMenuChoices.Charge, this.chargeVehicleBattery },
-            { eMenuChoices.ShowVehicleFullDetails, this.showVehicleFullDetails },
+            { eMenuChoices.InsertVehicle, insertVehicleToGarage },
+            { eMenuChoices.ShowLicensePlates, showLicensePlates },
+            { eMenuChoices.ChangeVehicleStatus, updateVehicleStatus },
+            { eMenuChoices.InflateWheelsToMax, inflateWheelsToMax },
+            { eMenuChoices.Refuel, refuelVehicle },
+            { eMenuChoices.Charge, chargeVehicleBattery },
+            { eMenuChoices.ShowVehicleFullDetails, showVehicleFullDetails },
             { eMenuChoices.Exit, () => m_IsRunning = false }
         };
     }
