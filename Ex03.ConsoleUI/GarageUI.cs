@@ -77,13 +77,14 @@ public class GarageUI
         StringBuilder welcomeBuilder = new StringBuilder();
         welcomeBuilder.AppendLine("** Welcome to the Ultimate Garage Manager! **");
         welcomeBuilder.AppendLine("We are here to help you manage your vehicles efficiently and effectively.");
-        Console.WriteLine(welcomeBuilder);
+        Console.Write(welcomeBuilder);
     }
     
     private void showMenu()
     {
         StringBuilder menuBuilder = new StringBuilder();
 
+        menuBuilder.AppendLine();
         menuBuilder.AppendLine($"Main Menu:");
         menuBuilder.AppendLine("1. Enter a vehicle to the garage");
         menuBuilder.AppendLine("2. Show license plates by status");
@@ -101,7 +102,6 @@ public class GarageUI
     
     private void insertVehicleToGarage()
     {
-        eEnergySourceType energyType;
         string licensePlate = readLicensePlate();
         if (r_Garage.IsVehicleExists(licensePlate))
         {
@@ -110,59 +110,63 @@ public class GarageUI
         }
         else
         {
-            eVehicleType vehicleType = this.readVehicleType();
-            if (vehicleType == eVehicleType.Car || vehicleType == eVehicleType.Motorcycle)
-            {
-                energyType = readEnergyType();
-            }
-            else
-            {
-                energyType = eEnergySourceType.Fuel;
-            }
-
-            float remainingEnergyPrecentage = readRemainingEnergyPrecentage();
-            VehicleOwner owner = new VehicleOwner();
-            assignOwnerDetails(owner);
-            string model = readModel();
-            string wheelsManufacture = readWheelsManufacture();
-            float currentAirPressure = readCurrentAirPressure();
-            eFuelType fuelType = readFuelType();
-            float? maximalTankCapacity = readFuelCapacity();
-            float? maximalChargeCapacity = readHourlyMaximalChargeCapacity();
-            Vehicle vehicle;
-            
-            if (vehicleType == eVehicleType.Car)
-            {
-                eCarColor color = readCarColor();
-                eCarDoorCount doorCount = this.readDoorsNumber();
-                vehicle = new Car(licensePlate, model, wheelsManufacture, color,
-                    doorCount, energyType, remainingEnergyPrecentage, fuelType,
-                    maximalTankCapacity, maximalChargeCapacity, owner
-                );
-            }
-            else if (vehicleType == eVehicleType.Truck)
-            {
-                bool isContainHazardousMaterials = readIsContainHazardousMaterials();
-                float trunkCapacity = readTrunkCapacity();
-                vehicle = new Truck(licensePlate, model, wheelsManufacture, isContainHazardousMaterials,
-                    trunkCapacity, energyType, remainingEnergyPrecentage, fuelType,
-                    maximalTankCapacity, owner
-                );
-            }
-            else
-            {
-                eMotorcycleLicenseType licenseType = readLicenseType();
-                int engineCapacity = readEngineCapacity();
-                vehicle = new Motorcycle(licensePlate, model, wheelsManufacture, licenseType,
-                    engineCapacity, energyType, remainingEnergyPrecentage, fuelType,
-                    maximalTankCapacity, maximalChargeCapacity, owner
-                );
-            }
-            
+            Vehicle vehicle = generateVehicle(licensePlate);
             r_Garage.AssignNewVehicle(vehicle.LicenseLicensePlate, vehicle, eVehicleStatus.InRepair);
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
+    }
+
+    private Vehicle generateVehicle(string i_LicensePlate)
+    {
+        eEnergySourceType energyType;
+        eVehicleType vehicleType = readVehicleType();
+        if (vehicleType == eVehicleType.Car || vehicleType == eVehicleType.Motorcycle)
+        {
+            energyType = readEnergyType();
+        }
+        else
+        {
+            energyType = eEnergySourceType.Fuel;
+        }
+
+        float remainingEnergyPrecentage = readRemainingEnergyPrecentage();
+        VehicleOwner owner = new VehicleOwner();
+        assignOwnerDetails(owner);
+        string model = readModel();
+        string wheelsManufacture = readWheelsManufacture();
+        float currentAirPressure = readCurrentAirPressure();
+        eFuelType fuelType = readFuelType();
+        float? maximalTankCapacity = readFuelCapacity();
+        float? maximalChargeCapacity = readHourlyMaximalChargeCapacity();
+        Vehicle vehicle;
+        
+        if (vehicleType == eVehicleType.Car)
+        {
+            eCarColor color = readCarColor();
+            eCarDoorCount doorCount = this.readDoorsNumber();
+            return new Car(i_LicensePlate, model, wheelsManufacture, color,
+                doorCount, energyType, remainingEnergyPrecentage, fuelType,
+                maximalTankCapacity, maximalChargeCapacity, owner
+            );
+        }
+        else if (vehicleType == eVehicleType.Truck)
+        {
+            bool isContainHazardousMaterials = readIsContainHazardousMaterials();
+            float trunkCapacity = readTrunkCapacity();
+            return new Truck(i_LicensePlate, model, wheelsManufacture, isContainHazardousMaterials,
+                trunkCapacity, energyType, remainingEnergyPrecentage, fuelType,
+                maximalTankCapacity, owner
+            );
+        }
+
+        eMotorcycleLicenseType licenseType = readLicenseType();
+        int engineCapacity = readEngineCapacity();
+        return new Motorcycle(i_LicensePlate, model, wheelsManufacture, licenseType,
+            engineCapacity, energyType, remainingEnergyPrecentage, fuelType,
+            maximalTankCapacity, maximalChargeCapacity, owner
+        );
+
     }
     
     private int readEngineCapacity()
