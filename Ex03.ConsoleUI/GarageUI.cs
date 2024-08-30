@@ -194,7 +194,7 @@ public class GarageUI
 
     private bool readIsContainHazardousMaterials()
     {
-        Console.WriteLine("\nIs the truck carry hazardous materials? (Choose: 1 or 2)\n" +
+        Console.WriteLine("\nIs the truck carry hazardous materials?\n" +
                                     "1.Yes\n" +
                                     "2.No\n" 
                                     );
@@ -286,7 +286,7 @@ public class GarageUI
     
     private eEnergySourceType readEnergyType()
     {
-        Console.WriteLine("\nChoose energy source type: (1 or 2)\n" +
+        Console.WriteLine("\nChoose energy source type:\n" +
                           "1.Electric\n" +
                           "2.Fuel"
         );
