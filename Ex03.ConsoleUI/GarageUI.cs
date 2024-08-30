@@ -28,25 +28,28 @@ public class GarageUI
     
     public void Run()
     {
-        try
+        showWelcomeMessage();
+        while (m_IsRunning)
         {
-            showWelcomeMessage();
-            while (m_IsRunning)
+            try
             {
                 showMenu();
                 if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice))
                 {
+                    Console.Clear();
                     r_MenuActions[userChoice].Invoke();
                 }
                 else
                 {
-                    Console.WriteLine($"Inserted invalid choice, Please enter a number between 1-{r_MenuActions.Count}");
+                    Console.Clear();
+                    Console.WriteLine("Inserted invalid choice");
                 }
             }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
+            catch (Exception e)
+            {
+                Console.Clear();
+                Console.WriteLine(e.Message);
+            }
         }
     }
 
@@ -81,7 +84,7 @@ public class GarageUI
     {
         StringBuilder menuBuilder = new StringBuilder();
 
-        menuBuilder.AppendLine($"Please select one of the options below (Choose 1-{r_MenuActions.Count}):");
+        menuBuilder.AppendLine($"Garage Main Menu:");
         menuBuilder.AppendLine("1. Enter a vehicle to the garage");
         menuBuilder.AppendLine("2. Show license plates by status");
         menuBuilder.AppendLine("3. Change vehicle status");
