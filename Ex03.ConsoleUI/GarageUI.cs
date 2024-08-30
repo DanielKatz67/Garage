@@ -73,11 +73,8 @@ public class GarageUI
     private void showWelcomeMessage()
     {
         StringBuilder welcomeBuilder = new StringBuilder();
-        welcomeBuilder.AppendLine("********************************************");
         welcomeBuilder.AppendLine("** Welcome to the Ultimate Garage Manager! **");
-        welcomeBuilder.AppendLine("********************************************");
         welcomeBuilder.AppendLine("We are here to help you manage your vehicles efficiently and effectively.");
-
         Console.WriteLine(welcomeBuilder);
     }
     
