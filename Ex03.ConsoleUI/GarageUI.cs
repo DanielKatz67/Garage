@@ -127,10 +127,11 @@ public class GarageUI
             string model = readModel();
             string wheelManufactureName = readWheelsManufacture();
             float currentAirPressure = readCurrentAirPressure();
- 
+            Vehicle vehicle;
+            
             if (vehicleType == eVehicleType.Car)
             {
-                this.readCarColor(vehicleToEnter);
+                eCarColor color = this.readCarColor();
                 this.userReadDoorsNumber(vehicleToEnter);
             }
             else if (vehicleType == eVehicleType.Truck)
@@ -151,9 +152,8 @@ public class GarageUI
         }
     }
     
-    private eCarColor readCarColor(Vehicle i_Vehicle)
+    private eCarColor readCarColor()
     {
-        Car car = i_Vehicle as Car;
         Console.WriteLine($"Enter the car color:" +
                             $"1. Red" +
                             $"2. Blue" +
@@ -218,7 +218,6 @@ public class GarageUI
         }
         throw new FormatException("The number you enterd should end with %  ");
     }
-
     
     private T ParseEnum<T>(string i_String)
     {
@@ -249,7 +248,7 @@ public class GarageUI
 
     private string readLicensePlate()
     {
-        Console.WriteLine("Enter Plate id:");
+        Console.WriteLine("Enter License Plate:");
         return Console.ReadLine();
     }
     
