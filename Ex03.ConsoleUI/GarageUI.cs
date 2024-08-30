@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Ex03.ConsoleUI;
 
 public class GarageUI
@@ -26,9 +28,8 @@ public class GarageUI
     {
         while (m_IsRunning)
         {
-            Console.WriteLine($"\nEnter your choice from the following (1-{m_MenuActions.Count}):");
-
-            if (TryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice) && m_MenuActions.ContainsKey(userChoice))
+            showMenu();
+            if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice) && m_MenuActions.ContainsKey(userChoice))
             {
                 m_MenuActions[userChoice].Invoke();
             }
@@ -39,7 +40,7 @@ public class GarageUI
         }
     }
 
-    private bool TryParseEnum<T>(string input, out T result) where T : struct, Enum
+    private bool tryParseEnum<T>(string input, out T result) where T : struct, Enum
     {
         result = default;
 
@@ -58,7 +59,25 @@ public class GarageUI
         return false;
     }
 
+    private void showMenu()
+    {
+        StringBuilder menuBuilder = new StringBuilder();
 
+        menuBuilder.AppendLine($"Please select one of the options below (Choose 1-{m_MenuActions.Count}):");
+        menuBuilder.AppendLine("1. Enter a new vehicle to the garage");
+        menuBuilder.AppendLine("2. Show plates list by filter");
+        menuBuilder.AppendLine("3. Change vehicle status");
+        menuBuilder.AppendLine("4. Inflate vehicle tires to the maximum");
+        menuBuilder.AppendLine("5. Refuel fuel-powered vehicle");
+        menuBuilder.AppendLine("6. Charge an electric vehicle");
+        menuBuilder.AppendLine("7. Show vehicle info by its plate");
+        menuBuilder.AppendLine("8. Quit");
+        menuBuilder.AppendLine();
+        menuBuilder.AppendLine($"Enter your choice from the following (1-{m_MenuActions.Count}):");
+
+        Console.WriteLine(menuBuilder.ToString());
+    }
+    
     private void insertVehicleToGarage()
     {
         Console.WriteLine("insertVehicleToGarage");
