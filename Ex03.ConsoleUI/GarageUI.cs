@@ -232,7 +232,7 @@ public class GarageUI
     {
         Console.WriteLine("\nEnter fuel type");
         
-        return this.ParseEnum<eFuelType>(Console.ReadLine());
+        return ParseEnum<eFuelType>(Console.ReadLine());
     }
 
     private eCarDoorCount readDoorsNumber()
