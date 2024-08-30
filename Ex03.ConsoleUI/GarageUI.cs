@@ -314,14 +314,13 @@ public class GarageUI
         {
             return (T)Enum.ToObject(typeof(T), int.Parse(i_String));
         }
-        else if (Enum.IsDefined(typeof(T), i_String))
+
+        if (Enum.IsDefined(typeof(T), i_String))
         {
             return (T)Enum.Parse(typeof(T), i_String, true);
         }
-        else
-        {
-            throw new FormatException();
-        }
+
+        throw new FormatException();
     }
     
     private eVehicleType readVehicleType()
@@ -343,12 +342,11 @@ public class GarageUI
     
     private void showLicensePlates()
     {
-        Console.WriteLine(string.Format(@"Filter by status: (Choose 1-4)
-1.In Repair
-2.Repaired and waiting for payment
-3.Paid
-4.All licenses
-"));
+        Console.WriteLine("Filter by status: (Choose 1-4)\n" +
+                          "1. In Repair\n" +
+                          "2. Repaired and waiting for payment\n" +
+                          "3. Paid\n" +
+                          "4. All licenses\n");
         string input = Console.ReadLine();
         eVehicleStatus status = ParseEnum<eVehicleStatus>(input);
         List<string> licensePlates = this.r_Garage.SearchLicensePlates(status);
@@ -369,11 +367,10 @@ public class GarageUI
     private void updateVehicleStatus()
     {
         string licensePlate = readLicensePlate();
-        Console.WriteLine(string.Format(@"Update status: 
-1. In Repair
-2. Repaired and waiting for payment
-3. Paid
-"));
+        Console.WriteLine("Update status:\n" +
+                          "1. In Repair\n" +
+                          "2. Repaired and waiting for payment\n" +
+                          "3. Paid\n");
         eVehicleStatus newStatus = this.ParseEnum<eVehicleStatus>(Console.ReadLine());
         r_Garage.SetStatus(licensePlate, newStatus);
     }
@@ -387,14 +384,13 @@ public class GarageUI
     private void refuelVehicle()
     {
         string licensePlate = readLicensePlate();
-        Console.WriteLine("Enter fuel amount to fill:");
+        Console.WriteLine("Enter quantity:");
         float fuelAmount = float.Parse(Console.ReadLine());
-        Console.WriteLine(@"Enter fuel type:
-1. Soler
-2. Octan95
-3. Octan96
-4. Octan98
-");
+        Console.WriteLine("Enter fuel type:\n" +
+                          "1. Soler\n" +
+                          "2. Octan95\n" +
+                          "3. Octan96\n" +
+                          "4. Octan98\n");
         eFuelType fuelType = ParseEnum<eFuelType>(Console.ReadLine());
         r_Garage.RefuelVehicle(licensePlate, fuelType, fuelAmount);
     }
@@ -402,7 +398,7 @@ public class GarageUI
     private void chargeVehicleBattery()
     {
         string licensePlate = readLicensePlate();
-        Console.WriteLine("How many hours?");
+        Console.WriteLine("How many hours to charge?");
         float hoursToCharge = float.Parse(Console.ReadLine());
         r_Garage.Charge(licensePlate, hoursToCharge);
     }
@@ -410,6 +406,6 @@ public class GarageUI
     private void showVehicleFullDetails()
     {
         string licensePlate = readLicensePlate();
-        Console.WriteLine($@"Information about vehicle {licensePlate} : {r_Garage.GetVehicleDetails(licensePlate)}");
+        Console.WriteLine($"Information about vehicle {licensePlate} : {r_Garage.GetVehicleDetails(licensePlate)}");
     }
 }
