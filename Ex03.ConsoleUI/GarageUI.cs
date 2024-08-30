@@ -93,7 +93,7 @@ public class GarageUI
         menuBuilder.AppendLine();
         menuBuilder.AppendLine($"Enter your choice from the following (1-{r_MenuActions.Count}):");
 
-        Console.WriteLine(menuBuilder);
+        Console.Write(menuBuilder);
     }
     
     private void insertVehicleToGarage()
