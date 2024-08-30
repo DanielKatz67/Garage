@@ -13,8 +13,8 @@ public class Car : Vehicle
     public Car(string i_LicensePlate, string i_ModelName, string i_WheelsManufacturer, 
         eCarColor i_CarColor, eCarDoorCount i_CarNumberOfDoors, 
         eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity,
-        eFuelType i_FuelType, float i_MaximalFuelTankCapacity, 
-        float i_MaximalChargeHoursCapacity, VehicleOwner i_VehicleOwner)
+        eFuelType i_FuelType, float? i_MaximalFuelTankCapacity, 
+        float? i_MaximalChargeHoursCapacity, VehicleOwner i_VehicleOwner)
         : base(i_LicensePlate, k_WheelsNumberInCar, i_ModelName, i_WheelsManufacturer, 
             k_MaximumWheelsAirPressure, i_CurrentEnergySourceCapacity,
             i_EnergySourceType, i_CurrentEnergySourceCapacity, i_FuelType, 

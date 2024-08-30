@@ -127,24 +127,19 @@ public class GarageUI
             string model = readModel();
             string wheelsManufacture = readWheelsManufacture();
             float currentAirPressure = readCurrentAirPressure();
-            eFuelType fuelType;
-            float maximalTankCapacity;
-            if (energyType == eEnergySourceType.Fuel)
-            {
-                fuelType = readFuelType();
-                maximalTankCapacity = readFuelCapacity();
-            }
-            else if (energyType == eEnergySourceType.Electric)
-            {
-                
-            }
+            eFuelType fuelType = readFuelType();
+            float? maximalTankCapacity = readFuelCapacity();
+            float? maximalChargeCapacity = readHourlyMaximalChargeCapacity();
             Vehicle vehicle;
             
             if (vehicleType == eVehicleType.Car)
             {
                 eCarColor color = this.readCarColor();
                 eCarDoorCount doorCount = this.readDoorsNumber();
-                vehicle = new Car(licensePlate, model, wheelsManufacture, color, doorCount, energyType, remainingEnergyPrecentage, fuelType)
+                vehicle = new Car(licensePlate, model, wheelsManufacture, color,
+                    doorCount, energyType, remainingEnergyPrecentage, fuelType,
+                    maximalTankCapacity, maximalChargeCapacity, owner
+                );
             }
             else if (vehicleType == eVehicleType.Truck)
             {
@@ -163,6 +158,18 @@ public class GarageUI
             Console.WriteLine("The vehicle now is in the Garage");
         }
     }
+
+    private float? readHourlyMaximalChargeCapacity()
+    {
+        Console.WriteLine("Enter hourly maximal charge capacity:");
+        string input = Console.ReadLine();
+
+        if (float.TryParse(input, out float hourlyChargeCapacity))
+        {
+            return hourlyChargeCapacity;
+        }
+
+        return null;    }
 
     private float? readFuelCapacity()
     {
