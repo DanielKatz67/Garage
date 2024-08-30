@@ -84,7 +84,7 @@ public class GarageUI
     {
         StringBuilder menuBuilder = new StringBuilder();
 
-        menuBuilder.AppendLine($"Garage Main Menu:");
+        menuBuilder.AppendLine($"Main Menu:");
         menuBuilder.AppendLine("1. Enter a vehicle to the garage");
         menuBuilder.AppendLine("2. Show license plates by status");
         menuBuilder.AppendLine("3. Change vehicle status");
