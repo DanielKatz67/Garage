@@ -17,7 +17,7 @@ public class GarageUI
         {
             { eMenuChoices.InsertVehicle, this.insertVehicleToGarage },
             { eMenuChoices.ShowLicensePlates, this.showLicensePlates },
-            { eMenuChoices.ChangeVehicleStatus, this.changeVehicleStatus },
+            { eMenuChoices.ChangeVehicleStatus, this.updateVehicleStatus },
             { eMenuChoices.InflateWheelsToMax, this.inflateWheelsToMax },
             { eMenuChoices.Refuel, this.refuelVehicle },
             { eMenuChoices.Charge, this.chargeVehicleBattery },
@@ -347,7 +347,7 @@ public class GarageUI
 1.In Repair
 2.Repaired and waiting for payment
 3.Paid
-4.All vehicles list
+4.All licenses
 "));
         string input = Console.ReadLine();
         eVehicleStatus status = ParseEnum<eVehicleStatus>(input);
@@ -366,9 +366,16 @@ public class GarageUI
         }
     }
 
-    private void changeVehicleStatus()
+    private void updateVehicleStatus()
     {
-        Console.WriteLine("changeVehicleStatus");
+        string licensePlate = readLicensePlate();
+        Console.WriteLine(string.Format(@"Update status: 
+1. In Repair
+2. Repaired and waiting for payment
+3. Paid
+"));
+        eVehicleStatus newStatus = this.ParseEnum<eVehicleStatus>(Console.ReadLine());
+        r_Garage.SetStatus(licensePlate, newStatus);
     }
 
     private void inflateWheelsToMax()
