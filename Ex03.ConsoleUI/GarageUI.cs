@@ -123,8 +123,8 @@ public class GarageUI
 
             float remaimingEnergyPrecentage = this.readRemaimingEnergyPrecentage();
             VehicleOwner owner = new VehicleOwner();
-            readOwnerDetails(owner);
-            string model = userReadModel(vehicleToEnter);
+            assignOwnerDetails(owner);
+            string model = readModel();
             userReadWheelsInteraction(vehicleToEnter);
  
             if (vehicleType == eVehicleType.Car)
@@ -150,7 +150,13 @@ public class GarageUI
         }
     }
     
-    private void readOwnerDetails(VehicleOwner i_Owner)
+    private string? readModel()
+    {
+        Console.WriteLine("Enter vehicle model name:");
+        return Console.ReadLine();
+    }
+    
+    private void assignOwnerDetails(VehicleOwner i_Owner)
     {
         Console.WriteLine("Enter vehicle owner name:");
         i_Owner.Name = Console.ReadLine();
