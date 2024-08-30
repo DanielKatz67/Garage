@@ -143,8 +143,12 @@ public class GarageUI
             }
             else if (vehicleType == eVehicleType.Truck)
             {
-                this.readIsContainHazardousMaterials(vehicleToEnter);
-                this.userReadTrunkCapacity(vehicleToEnter);
+                bool isContainHazardousMaterials = readIsContainHazardousMaterials();
+                float trunkCapacity = readTrunkCapacity();
+                vehicle = new Truck(licensePlate, model, wheelsManufacture, isContainHazardousMaterials,
+                    trunkCapacity, energyType, remainingEnergyPrecentage, fuelType,
+                    maximalTankCapacity, owner
+                );
             }
             else if (vehicleType == eVehicleType.Motorcycle)
             {
@@ -157,6 +161,13 @@ public class GarageUI
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
+    }
+    
+    private float readTrunkCapacity()
+    {
+        Console.WriteLine("Enter truck's trunk capacity :");
+        
+        return float.Parse(Console.ReadLine());
     }
 
     private bool readIsContainHazardousMaterials()
