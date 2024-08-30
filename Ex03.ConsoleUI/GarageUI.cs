@@ -26,38 +26,36 @@ public class GarageUI
     {
         while (m_IsRunning)
         {
-            try
+            Console.WriteLine($"\nEnter your choice from the following (1-{m_MenuActions.Count}):");
+
+            if (TryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice) && m_MenuActions.ContainsKey(userChoice))
             {
-                eMenuChoices userChoice = this.ParseEnum<eMenuChoices>(Console.ReadLine());
-                if (m_MenuActions.ContainsKey(userChoice))
-                {
-                    m_MenuActions[userChoice].Invoke();
-                }
-                else
-                {
-                    Console.WriteLine("Inserted invalid choice, Please enter a number between 1-8");
-                }
+                m_MenuActions[userChoice].Invoke();
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Inserted invalid choice, Please enter a number between 1-{m_MenuActions.Count}");
             }
         }
     }
-    
-    private T ParseEnum<T>(string i_String)
+
+    private bool TryParseEnum<T>(string input, out T result) where T : struct, Enum
     {
-        if (Enum.IsDefined(typeof(T), int.Parse(i_String)))
+        result = default;
+
+        if (int.TryParse(input, out int intValue) && Enum.IsDefined(typeof(T), intValue))
         {
-            return (T)Enum.ToObject(typeof(T), int.Parse(i_String));
+            result = (T)Enum.ToObject(typeof(T), intValue);
+            return true;
         }
 
-        if (Enum.IsDefined(typeof(T), i_String))
+        if (Enum.TryParse(input, true, out T enumValue) && Enum.IsDefined(typeof(T), enumValue))
         {
-            return (T)Enum.Parse(typeof(T), i_String, true);
+            result = enumValue;
+            return true;
         }
 
-        throw new FormatException();
+        return false;
     }
 
 
