@@ -294,20 +294,18 @@ public class GarageUI
     
     private float readRemainingEnergyPrecentage()
     {
-        Console.WriteLine("The percent of energy in the vehicle (Format of: <0-100%>):");
-        string remainingPrecentage = Console.ReadLine();
-        if (remainingPrecentage[remainingPrecentage.Length - 1] == '%')
-        {
-            float leftPercentsFloat = float.Parse(remainingPrecentage.Substring(0, remainingPrecentage.Length - 1));
-            if (leftPercentsFloat <= 100.0F && leftPercentsFloat >= 0.0F)
-            {
-                return leftPercentsFloat;
-            }
+        Console.WriteLine("Enter the remaining energy percentage:");
+        string remainingPercentage = Console.ReadLine();
+        string pattern = @"^(100|[1-9]?[0-9])%$";
 
-            throw new ValueOutOfRangeException(0.0F, 100.0F);
+        if (System.Text.RegularExpressions.Regex.IsMatch(remainingPercentage, pattern))
+        {
+            float percentageValue = float.Parse(remainingPercentage.Substring(0, remainingPercentage.Length - 1));
+            
+            return percentageValue;
         }
-        
-        throw new FormatException("The number you enterd should end with %  ");
+
+        throw new FormatException("The input must be a valid percentage between 0 and 100, ending with %.");
     }
     
     private T ParseEnum<T>(string i_String)
@@ -354,9 +352,9 @@ public class GarageUI
         if (licensePlates.Count > 0)
         {
             Console.WriteLine("License Plates:");
-            foreach (string plate in licensePlates)
+            foreach (string licensePlate in licensePlates)
             {
-                Console.WriteLine($"- {plate}");
+                Console.WriteLine($"- {licensePlate}");
             }
         }
         else
