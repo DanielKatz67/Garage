@@ -24,8 +24,24 @@ public class GarageUI
     
     public void Run()
     {
-        
+
     }
+    
+    private T ParseEnum<T>(string i_String)
+    {
+        if (Enum.IsDefined(typeof(T), int.Parse(i_String)))
+        {
+            return (T)Enum.ToObject(typeof(T), int.Parse(i_String));
+        }
+
+        if (Enum.IsDefined(typeof(T), i_String))
+        {
+            return (T)Enum.Parse(typeof(T), i_String, true);
+        }
+
+        throw new FormatException();
+    }
+
     
     private void insertVehicleToGarage() { /* ... */ }
     private void showLicensePlates() { /* ... */ }
