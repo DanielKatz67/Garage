@@ -102,7 +102,7 @@ public class GarageUI
     
     private void insertVehicleToGarage()
     {
-        eEnergySourceType sourceType;
+        eEnergySourceType energyType;
         string licensePlate = readLicensePlate();
         if (r_Garage.IsVehicleExists(licensePlate))
         {
@@ -114,25 +114,37 @@ public class GarageUI
             eVehicleType vehicleType = this.readVehicleType();
             if (vehicleType == eVehicleType.Car || vehicleType == eVehicleType.Motorcycle)
             {
-                sourceType = readEnergyType();
+                energyType = readEnergyType();
             }
             else
             {
-                sourceType = eEnergySourceType.Fuel;
+                energyType = eEnergySourceType.Fuel;
             }
 
             float remainingEnergyPrecentage = readRemainingEnergyPrecentage();
             VehicleOwner owner = new VehicleOwner();
             assignOwnerDetails(owner);
             string model = readModel();
-            string wheelManufactureName = readWheelsManufacture();
+            string wheelsManufacture = readWheelsManufacture();
             float currentAirPressure = readCurrentAirPressure();
+            eFuelType fuelType;
+            float maximalTankCapacity;
+            if (energyType == eEnergySourceType.Fuel)
+            {
+                fuelType = readFuelType();
+                maximalTankCapacity = readFuelCapacity();
+            }
+            else if (energyType == eEnergySourceType.Electric)
+            {
+                
+            }
             Vehicle vehicle;
             
             if (vehicleType == eVehicleType.Car)
             {
                 eCarColor color = this.readCarColor();
-                this.userReadDoorsNumber(vehicleToEnter);
+                eCarDoorCount doorCount = this.readDoorsNumber();
+                vehicle = new Car(licensePlate, model, wheelsManufacture, color, doorCount, energyType, remainingEnergyPrecentage, fuelType)
             }
             else if (vehicleType == eVehicleType.Truck)
             {
@@ -150,6 +162,33 @@ public class GarageUI
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
+    }
+
+    private float? readFuelCapacity()
+    {
+        Console.WriteLine("Enter fuel capacity:");
+        string input = Console.ReadLine();
+
+        if (float.TryParse(input, out float fuelCapacity))
+        {
+            return fuelCapacity;
+        }
+
+        return null;
+    }
+
+    private eFuelType readFuelType()
+    {
+        Console.WriteLine("Enter fuel type");
+        
+        return this.ParseEnum<eFuelType>(Console.ReadLine());
+    }
+
+    private eCarDoorCount readDoorsNumber()
+    {
+        Console.WriteLine("Enter doors number (2/3/4/5):");
+        
+        return this.ParseEnum<eCarDoorCount>(Console.ReadLine());
     }
     
     private eCarColor readCarColor()
@@ -175,12 +214,14 @@ public class GarageUI
     private string readWheelsManufacture()
     {
         Console.WriteLine("Enter vehicle wheels manufacture:");
+        
         return Console.ReadLine();
     }
     
     private string? readModel()
     {
         Console.WriteLine("Enter model:");
+        
         return Console.ReadLine();
     }
     
@@ -216,6 +257,7 @@ public class GarageUI
 
             throw new ValueOutOfRangeException(0.0F, 100.0F);
         }
+        
         throw new FormatException("The number you enterd should end with %  ");
     }
     
@@ -249,6 +291,7 @@ public class GarageUI
     private string readLicensePlate()
     {
         Console.WriteLine("Enter License Plate:");
+        
         return Console.ReadLine();
     }
     
