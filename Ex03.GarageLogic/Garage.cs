@@ -16,6 +16,11 @@ public class Garage
         r_LicensePlateToRegistry[i_LicensePlate] = new GarageRegistry(i_Vehicle, i_Status);
     }
 
+    public bool VehicleExists(string i_LicensePlate)
+    {
+        return r_LicensePlateToRegistry.ContainsKey(i_LicensePlate);
+    }
+    
     public List<string> SearchLicensePlates(eVehicleStatus? i_FilterByStatus)
     {
         List<string> vehicleList = new List<string>();
@@ -63,17 +68,17 @@ public class Garage
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
         return garageRegistry.RegisteredVehcle;
     }
-    
+
     private GarageRegistry getRegistry(string i_LicensePlate)
     {
-        bool isVehicleInTheGarage = r_LicensePlateToRegistry.TryGetValue(i_LicensePlate, out GarageRegistry vehicleRegistry);
-        
+        bool isVehicleInTheGarage =
+            r_LicensePlateToRegistry.TryGetValue(i_LicensePlate, out GarageRegistry vehicleRegistry);
+
         if (!isVehicleInTheGarage)
         {
             throw new ArgumentException("The vehicle did not register to the garage");
         }
-        
+
         return vehicleRegistry;
     }
-
 }

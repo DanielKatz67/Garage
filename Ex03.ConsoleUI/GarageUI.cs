@@ -26,18 +26,27 @@ public class GarageUI
     
     public void Run()
     {
-        showWelcomeMessage();
-        while (m_IsRunning)
+        try
         {
-            showMenu();
-            if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice))
+            showWelcomeMessage();
+            while (m_IsRunning)
             {
-                m_MenuActions[userChoice].Invoke();
+                showMenu();
+                if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice))
+                {
+                    m_MenuActions[userChoice].Invoke();
+                }
+                else
+                {
+                    Console.WriteLine($"Inserted invalid choice, Please enter a number between 1-{m_MenuActions.Count}");
+                }
             }
-            else
-            {
-                Console.WriteLine($"Inserted invalid choice, Please enter a number between 1-{m_MenuActions.Count}");
-            }
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
     }
 
