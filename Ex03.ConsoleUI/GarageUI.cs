@@ -152,15 +152,15 @@ public class GarageUI
     
     private string? readModel()
     {
-        Console.WriteLine("Enter vehicle model name:");
+        Console.WriteLine("Enter model:");
         return Console.ReadLine();
     }
     
     private void assignOwnerDetails(VehicleOwner i_Owner)
     {
-        Console.WriteLine("Enter vehicle owner name:");
+        Console.WriteLine("Enter owner name:");
         i_Owner.Name = Console.ReadLine();
-        Console.WriteLine("Enter vehicle owner phone:");
+        Console.WriteLine("Enter owner phone:");
         i_Owner.PhoneNumber = Console.ReadLine();
     }
     
