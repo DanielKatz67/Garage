@@ -12,7 +12,10 @@ public abstract class Vehicle
     
     public string LicenseLicensePlate
     {
-        get { return this.r_LicenseLicensePlate; }
+        get
+        {
+            return r_LicenseLicensePlate;
+        }
     }
 
     public int NumberOfWheels
@@ -28,7 +31,6 @@ public abstract class Vehicle
         get
         {
             return r_ModelName;
-
         }
     }
     
@@ -37,7 +39,6 @@ public abstract class Vehicle
         get
         {
             return r_Wheels;
-
         }
     }
     
@@ -54,21 +55,23 @@ public abstract class Vehicle
         get
         {
             return m_EnergyRemaningPrecentage;
-
         }
     }
     
     protected Vehicle(string i_LicensePlate, int i_NumberOfWheels, string i_ModelName, 
         string i_WheelsManufacturer, float i_WheelsMaximumAirPressure, float i_WheelsCurrentAirPressure, 
-        EnergySource i_EnergySource, VehicleOwner i_VehicleOwner)
+        eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity, 
+        eFuelType? i_FuelType, float? i_MaximalFuelTankCapacity, 
+        float? i_MaximalChargeHoursCapacity, VehicleOwner i_VehicleOwner)
     {
         r_LicenseLicensePlate = i_LicensePlate;
         r_NumberOfWheels = i_NumberOfWheels;
         r_ModelName = i_ModelName;
         addWheelsToVehicle(i_WheelsManufacturer, i_WheelsMaximumAirPressure, i_WheelsCurrentAirPressure);
-        r_EnergySource = i_EnergySource;
         updateEnergyRemainingPercentage();
         m_VehicleOwner = i_VehicleOwner;
+        r_EnergySource = createEnergySource(i_EnergySourceType, i_CurrentEnergySourceCapacity, i_FuelType, 
+            i_MaximalFuelTankCapacity, i_MaximalChargeHoursCapacity);
     }
     
     private void addWheelsToVehicle(string i_WheelsManufacturer, float i_WheelsMaximumAirPressure, float i_WheelsCurrentAirPressure)
@@ -86,5 +89,63 @@ public abstract class Vehicle
     private void updateEnergyRemainingPercentage()
     {
         m_EnergyRemaningPrecentage = (r_EnergySource.CurrentEnergySourceCapacity / r_EnergySource.MaxEnergySourceAmount) * 100;
+    }
+    
+    protected EnergySource createEnergySource(eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity,
+        eFuelType? i_FuelType, float? i_MaximalFuelTankCapacity, float? i_MaximalChargeHoursCapacity)
+    {
+        switch (i_EnergySourceType)
+        {
+            case eEnergySourceType.Fuel:
+                if (i_FuelType == null || i_MaximalFuelTankCapacity == null)
+                {
+                    throw new ArgumentException("Fuel type and fuel tank capacity must be provided for fuel energy source.");
+                }
+                return new FuelEnergySource(i_FuelType.Value, i_MaximalFuelTankCapacity.Value, i_CurrentEnergySourceCapacity);
+
+            case eEnergySourceType.Electric:
+                if (i_MaximalChargeHoursCapacity == null)
+                {
+                    throw new ArgumentException("Maximal charge hours capacity must be provided for electric energy source.");
+                }
+                return new ElectricEnergySource(i_MaximalChargeHoursCapacity.Value, i_CurrentEnergySourceCapacity);
+
+            default:
+                throw new ArgumentException("Invalid energy source type");
+        }
+    }
+    
+    public void RefuelVehicle(eFuelType i_FuelType, float i_FuelQuantityToAdd)
+    {
+        if (r_EnergySource is FuelEnergySource fuelEnergySource)
+        {
+            fuelEnergySource.Refuel(i_FuelQuantityToAdd, i_FuelType);
+            updateEnergyRemainingPercentage();
+        }
+        else
+        {
+            throw new ArgumentException("Cannot refuel - vehicle energy source is not fuel.");
+        }
+    }
+    
+    public void ChargeVehicle(float i_HoursQuantityToAdd)
+    {
+        if (r_EnergySource is ElectricEnergySource electricEnergySource)
+        {
+            electricEnergySource.ChargeBattery(i_HoursQuantityToAdd);
+            updateEnergyRemainingPercentage();
+        }
+        else
+        {
+            throw new ArgumentException("Cannot charge - vehicle energy source is not electric.");
+        }
+    }
+    
+    public override string ToString()
+    {
+        return $"License Plate: {r_LicenseLicensePlate}, Model: {r_ModelName}, " +
+               $"Number of Wheels: {r_NumberOfWheels}, Wheels Info: {string.Join(", ", r_Wheels)}, " +
+               $"Energy Remaining: {m_EnergyRemaningPrecentage}%, Energy Source: {r_EnergySource}, " +
+               $"Owner: {m_VehicleOwner}";
     }
 }

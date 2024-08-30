@@ -11,6 +11,12 @@ public class FuelEnergySource : EnergySource
             return r_FuelType;
         }
     }
+    
+    public FuelEnergySource(eFuelType i_FuelType, float i_MaximalFuelTankCapacity, float i_CurrentFuelCapacity)
+        : base(i_MaximalFuelTankCapacity, i_CurrentFuelCapacity)
+    {
+        r_FuelType = i_FuelType;
+    }
 
     public void Refuel(float i_FuelQuantityToAdd, eFuelType i_FuelType)
     {

@@ -24,6 +24,12 @@ public abstract class EnergySource
             m_CurrentEnergySourceCapacity = value;
         }
     }
+
+    public EnergySource(float i_MaximalChargeHoursCapacity, float i_CurrentChargeCapacity)
+    {
+        r_MaximalEnergySourceCapacity = i_MaximalChargeHoursCapacity;
+        m_CurrentEnergySourceCapacity = i_CurrentChargeCapacity;
+    }
     
     public override string ToString()
     {
