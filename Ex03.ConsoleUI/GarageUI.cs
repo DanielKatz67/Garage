@@ -174,11 +174,11 @@ public class GarageUI
     
     private eMotorcycleLicenseType readLicenseType()
     {
-        Console.WriteLine($"Enter motorcycle license type:" +
-                                    $"1. A1" +
-                                    $"2. A2" + 
-                                    $"3. AB" +
-                                    $"4. B"
+        Console.WriteLine("Enter motorcycle license type:\n" +
+                                    "1. A1\n" +
+                                    "2. A2\n" + 
+                                    "3. AB\n" +
+                                    "4. B\n"
         );
         
         return ParseEnum<eMotorcycleLicenseType>(Console.ReadLine());
@@ -193,9 +193,9 @@ public class GarageUI
 
     private bool readIsContainHazardousMaterials()
     {
-        Console.WriteLine($"Is the truck carry hazardous materials? (Choose: 1 or 2)" +
-                                    $"1.Yes" +
-                                    $"2.No" 
+        Console.WriteLine("Is the truck carry hazardous materials? (Choose: 1 or 2)\n" +
+                                    "1.Yes\n" +
+                                    "2.No\n" 
                                     );
         int isContainHazardous = int.Parse(Console.ReadLine());
 
@@ -243,11 +243,11 @@ public class GarageUI
     
     private eCarColor readCarColor()
     {
-        Console.WriteLine($"Enter the car color:" +
-                            $"1. Blue" +
-                            $"2. White" +
-                            $"3. Black"+
-                            $"4. Red"
+        Console.WriteLine("Enter the car color:\n" +
+                            "1. Blue\n" +
+                            "2. White\n" +
+                            "3. Black\n"+
+                            "4. Red\n"
                         );
      
         return ParseEnum<eCarColor>(Console.ReadLine());
@@ -285,9 +285,9 @@ public class GarageUI
     
     private eEnergySourceType readEnergyType()
     {
-        Console.WriteLine($"Choose energy source type: (1 or 2)" +
-                          $"1.Electric" +
-                          $"2.Fuel"
+        Console.WriteLine("Choose energy source type: (1 or 2)\n" +
+                          "1.Electric\n" +
+                          "2.Fuel\n"
         );
         
         return this.ParseEnum<eEnergySourceType>(Console.ReadLine());
@@ -329,10 +329,10 @@ public class GarageUI
     
     private eVehicleType readVehicleType()
     {
-        Console.WriteLine($"Enter the vehicle type:" +
-                          $"1. Motorcycle" +
-                          $"2. Car" +
-                          $"3. Truck");
+        Console.WriteLine("Enter the vehicle type:\n" +
+                          "1. Motorcycle\n" +
+                          "2. Car\n" +
+                          "3. Truck");
         
         return this.ParseEnum<eVehicleType>(Console.ReadLine());
     }
