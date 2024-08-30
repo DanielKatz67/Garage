@@ -114,7 +114,7 @@ public class GarageUI
             eVehicleType vehicleType = this.readVehicleType();
             if (vehicleType == eVehicleType.Car || vehicleType == eVehicleType.Motorcycle)
             {
-                sourceType = this.readEnergyType();
+                sourceType = readEnergyType();
             }
             else
             {
@@ -125,7 +125,8 @@ public class GarageUI
             VehicleOwner owner = new VehicleOwner();
             assignOwnerDetails(owner);
             string model = readModel();
-            userReadWheelsInteraction(vehicleToEnter);
+            string wheelManufactureName = readWheelsManufacture();
+            float currentAirPressure = readCurrentAirPressure();
  
             if (vehicleType == eVehicleType.Car)
             {
@@ -148,6 +149,20 @@ public class GarageUI
             Console.Clear();
             Console.WriteLine("The vehicle now is in the Garage");
         }
+    }
+    
+    private float readCurrentAirPressure()
+    {
+        Console.WriteLine("Enter wheels current air pressure:");
+        float userCurrentAirPressure = float.Parse(Console.ReadLine());
+        
+        return userCurrentAirPressure;
+    }
+    
+    private string readWheelsManufacture()
+    {
+        Console.WriteLine("Enter vehicle wheels manufacture:");
+        return Console.ReadLine();
     }
     
     private string? readModel()
