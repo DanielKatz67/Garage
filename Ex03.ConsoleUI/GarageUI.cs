@@ -60,12 +60,39 @@ public class GarageUI
         throw new FormatException();
     }
 
-    
-    private void insertVehicleToGarage() { /* ... */ }
-    private void showLicensePlates() { /* ... */ }
-    private void changeVehicleStatus() { /* ... */ }
-    private void inflateWheelsToMax() { /* ... */ }
-    private void refuelVehicle() { /* ... */ }
-    private void chargeVehicleBattery() { /* ... */ }
-    private void showVehicleFullDetails() { /* ... */ }
+
+    private void insertVehicleToGarage()
+    {
+        Console.WriteLine("insertVehicleToGarage");
+    }
+
+    private void showLicensePlates()
+    {
+        Console.WriteLine("showLicensePlates");
+    }
+
+    private void changeVehicleStatus()
+    {
+        Console.WriteLine("changeVehicleStatus");
+    }
+
+    private void inflateWheelsToMax()
+    {
+        Console.WriteLine("inflateWheelsToMax");
+    }
+
+    private void refuelVehicle()
+    {
+        Console.WriteLine(refuelVehicle);
+    }
+
+    private void chargeVehicleBattery()
+    {
+        Console.WriteLine("chargeVehicleBattery");
+    }
+
+    private void showVehicleFullDetails()
+    {
+        Console.WriteLine("showVehicleFullDetails");
+    }
 }
