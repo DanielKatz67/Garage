@@ -141,7 +141,7 @@ public class GarageUI
         if (vehicleType == eVehicleType.Car)
         {
             eCarColor color = readCarColor();
-            eCarDoorCount doorCount = this.readDoorsNumber();
+            eCarDoorCount doorCount = readDoorsNumber();
             return new Car(i_LicensePlate, model, wheelsManufacture, color,
                 doorCount, energyType, remainingEnergyPrecentage, fuelType,
                 maximalTankCapacity, maximalChargeCapacity, owner
@@ -239,7 +239,7 @@ public class GarageUI
     {
         Console.WriteLine("\nEnter doors number (2/3/4/5):");
         
-        return this.ParseEnum<eCarDoorCount>(Console.ReadLine());
+        return ParseEnum<eCarDoorCount>(Console.ReadLine());
     }
     
     private eCarColor readCarColor()
@@ -332,7 +332,7 @@ public class GarageUI
                           "2. Car\n" +
                           "3. Truck");
         
-        return this.ParseEnum<eVehicleType>(Console.ReadLine());
+        return ParseEnum<eVehicleType>(Console.ReadLine());
     }
 
     private string readLicensePlate()
@@ -383,7 +383,7 @@ public class GarageUI
                           "1. In Repair\n" +
                           "2. Repaired and waiting for payment\n" +
                           "3. Paid\n");
-        eVehicleStatus newStatus = this.ParseEnum<eVehicleStatus>(Console.ReadLine());
+        eVehicleStatus newStatus = ParseEnum<eVehicleStatus>(Console.ReadLine());
         r_Garage.SetStatus(licensePlate, newStatus);
     }
 
