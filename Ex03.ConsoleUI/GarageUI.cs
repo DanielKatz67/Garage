@@ -321,7 +321,7 @@ public class GarageUI
         {
             return (T)Enum.Parse(typeof(T), i_String, true);
         }
-
+        
         throw new FormatException();
     }
     
@@ -350,8 +350,7 @@ public class GarageUI
                           "3. Paid\n" +
                           "4. All licenses\n");
         string input = Console.ReadLine();
-        eVehicleStatus status = ParseEnum<eVehicleStatus>(input);
-        List<string> licensePlates = this.r_Garage.SearchLicensePlates(status);
+        List<string> licensePlates = getLicensePlates(input);
         if (licensePlates.Count > 0)
         {
             Console.WriteLine("License Plates:");
@@ -364,6 +363,17 @@ public class GarageUI
         {
             Console.WriteLine("No license plates found with the given status.");
         }
+    }
+
+    private List<string> getLicensePlates(string i_Filter)
+    {
+        if (i_Filter == "4")
+        {
+            return r_Garage.SearchLicensePlates(null);
+        }
+
+        eVehicleStatus status = ParseEnum<eVehicleStatus>(i_Filter);
+        return r_Garage.SearchLicensePlates(status);            
     }
 
     private void updateVehicleStatus()
