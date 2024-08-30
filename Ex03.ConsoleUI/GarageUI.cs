@@ -334,7 +334,6 @@ public class GarageUI
         return this.ParseEnum<eVehicleType>(Console.ReadLine());
     }
 
-
     private string readLicensePlate()
     {
         Console.WriteLine("Enter License Plate:");
@@ -344,7 +343,27 @@ public class GarageUI
     
     private void showLicensePlates()
     {
-        Console.WriteLine("showLicensePlates");
+        Console.WriteLine(string.Format(@"Filter by status: (Choose 1-4)
+1.In Repair
+2.Repaired and waiting for payment
+3.Paid
+4.All vehicles list
+"));
+        string input = Console.ReadLine();
+        eVehicleStatus status = ParseEnum<eVehicleStatus>(input);
+        List<string> licensePlates = this.r_Garage.SearchLicensePlates(status);
+        if (licensePlates.Count > 0)
+        {
+            Console.WriteLine("License Plates:");
+            foreach (string plate in licensePlates)
+            {
+                Console.WriteLine($"- {plate}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No license plates found with the given status.");
+        }
     }
 
     private void changeVehicleStatus()
