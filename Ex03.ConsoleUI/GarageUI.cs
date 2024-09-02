@@ -41,6 +41,7 @@ public class GarageUI
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("Inserted invalid choice");
                 }
             }
