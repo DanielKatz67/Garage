@@ -11,14 +11,13 @@ public class Motorcycle : Vehicle
     private const int k_WheelsNumberInMotorcycle = 2;
     
     public Motorcycle(string i_LicensePlate, string i_ModelName, string i_WheelsManufacturer, 
-        eMotorcycleLicenseType i_MotorcycleLicenseType, int i_EngineCapacity, 
-        eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity,
-        eFuelType i_FuelType, float? i_MaximalFuelTankCapacity, 
-        float? i_MaximalChargeHoursCapacity, VehicleOwner i_VehicleOwner)
+            float i_CurrentWheelsAirPressure, eMotorcycleLicenseType i_MotorcycleLicenseType, 
+            int i_EngineCapacity, eEnergySourceType i_EnergySourceType, 
+            float i_CurrentEnergySourceCapacity, VehicleOwner i_VehicleOwner)
         : base(i_LicensePlate, k_WheelsNumberInMotorcycle, i_ModelName, i_WheelsManufacturer, 
-            k_MaximumWheelsAirPressure, i_CurrentEnergySourceCapacity,
-            i_EnergySourceType, i_CurrentEnergySourceCapacity, i_FuelType, 
-            i_MaximalFuelTankCapacity, i_MaximalChargeHoursCapacity, i_VehicleOwner)
+            k_MaximumWheelsAirPressure, i_CurrentWheelsAirPressure,
+            i_EnergySourceType, i_CurrentEnergySourceCapacity, k_FuelType, 
+            k_MaximalFuelTankCapacity, k_MaximalChargeHoursCapacity, i_VehicleOwner)
     {
         m_MotorcycleLicenseType = i_MotorcycleLicenseType;
         m_EngineCapacity = i_EngineCapacity;
