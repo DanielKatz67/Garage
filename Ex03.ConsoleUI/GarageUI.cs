@@ -142,29 +142,24 @@ public class GarageUI
         {
             eCarColor color = readCarColor();
             eCarDoorCount doorCount = readDoorsNumber();
-            return new Car(i_LicensePlate, model, wheelsManufacture, color,
-                doorCount, energyType, remainingEnergyPrecentage, fuelType,
-                maximalTankCapacity, maximalChargeCapacity, owner
-            );
+            return new Car(i_LicensePlate, model, wheelsManufacture, currentAirPressure,
+                                color, doorCount, energyType, remainingEnergyPrecentage, owner);
         }
 
         if (vehicleType == eVehicleType.Truck)
         {
             bool isContainHazardousMaterials = readIsContainHazardousMaterials();
             float trunkCapacity = readTrunkCapacity();
-            return new Truck(i_LicensePlate, model, wheelsManufacture, isContainHazardousMaterials,
-                trunkCapacity, energyType, remainingEnergyPrecentage, fuelType,
-                maximalTankCapacity, owner
-            );
+            return new Truck(i_LicensePlate, model, wheelsManufacture, currentAirPressure,
+                                isContainHazardousMaterials, trunkCapacity, energyType, 
+                                remainingEnergyPrecentage, owner);
         }
 
         eMotorcycleLicenseType licenseType = readLicenseType();
         int engineCapacity = readEngineCapacity();
-        return new Motorcycle(i_LicensePlate, model, wheelsManufacture, licenseType,
-            engineCapacity, energyType, remainingEnergyPrecentage, fuelType,
-            maximalTankCapacity, maximalChargeCapacity, owner
-        );
-
+        return new Motorcycle(i_LicensePlate, model, wheelsManufacture, currentAirPressure,
+                                licenseType, engineCapacity, energyType, 
+                                remainingEnergyPrecentage, owner);
     }
     
     private int readEngineCapacity()
