@@ -43,6 +43,6 @@ public class Wheel
 
     public override string ToString()
     {
-        return $"Manufacture Name: {r_Manufacturer}, Max Air Pressure: {r_MaximumAirPressure}, Current Air Pressure: {m_CurrentAirPressure}";
+        return $"Manufacture name: {r_Manufacturer}, max air pressure: {r_MaximumAirPressure}, current air pressure: {m_CurrentAirPressure}";
     }
 }

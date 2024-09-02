@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Ex03.GarageLogic;
 
 public abstract class Vehicle
@@ -140,12 +142,27 @@ public abstract class Vehicle
             throw new ArgumentException("Cannot charge - vehicle energy source is not electric.");
         }
     }
+
+    private string printWheels()
+    {
+        StringBuilder wheelsString = new StringBuilder();
+        int wheelNumber = 1;
+        foreach (Wheel wheel in r_Wheels)
+        {
+            wheelsString.Append($"Wheel number {wheelNumber}: {wheel}.\n");
+            wheelNumber++;
+        }
+        
+        return wheelsString.ToString();
+    }
     
     public override string ToString()
     {
-        return $"License Plate: {r_LicenseLicensePlate}, Model: {r_ModelName}, " +
-               $"Number of Wheels: {r_NumberOfWheels}, Wheels Info: {string.Join(", ", r_Wheels)}, " +
-               $"Energy Remaining: {m_EnergyRemaningPrecentage}%, Energy Source: {r_EnergySource}, " +
-               $"Owner: {m_VehicleOwner}";
+        return $"License plate: {r_LicenseLicensePlate}, model: {r_ModelName}.\n" +
+               $"Number of wheels: {r_NumberOfWheels}, wheels info:\n" +
+               $"{printWheels()}\n" + 
+               $"Energy source: {r_EnergySource}\n" +
+               $"Energy remaining percentage: {m_EnergyRemaningPrecentage}%\n" +
+               $"Owner: {m_VehicleOwner}\n";
     }
 }

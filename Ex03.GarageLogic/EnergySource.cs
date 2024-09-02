@@ -33,7 +33,7 @@ public abstract class EnergySource
     
     public override string ToString()
     {
-        return $"Maximal Energy Source: {r_MaximalEnergySourceCapacity}, Current Energy Source: {m_CurrentEnergySourceCapacity}." ;
+        return $"Maximal Energy Source: {r_MaximalEnergySourceCapacity}, Current Energy Source: {m_CurrentEnergySourceCapacity}" ;
     }
 
 }

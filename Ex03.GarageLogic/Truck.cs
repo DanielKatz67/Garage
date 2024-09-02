@@ -23,9 +23,9 @@ public class Truck : Vehicle
     
     public override string ToString()
     {
-        return $"{base.ToString()}, " +
-               $"The truc is {(m_IsCarryingDangerousMaterials ? "" : "not ")}carrying dangerous materials." +
-               $"Trunk cargo volume: {m_TrunkCargoVolume}.";
+        return $"{base.ToString()}\n" +
+               $"The truc is {(m_IsCarryingDangerousMaterials ? "" : "not ")}carrying dangerous materials\n" +
+               $"Trunk cargo volume: {m_TrunkCargoVolume}\n";
     }
     
 }

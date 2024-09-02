@@ -25,8 +25,8 @@ public class Car : Vehicle
     
     public override string ToString()
     {
-        return $"{base.ToString()}, " +
-               $"Color: {m_CarColor}, Number of Doors: {r_CarNumberOfDoors}";
+        return $"{base.ToString()}\n" +
+               $"Color: {m_CarColor}, number of doors: {r_CarNumberOfDoors}\n";
     }
     
 }

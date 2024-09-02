@@ -384,6 +384,7 @@ public class GarageUI
     private void showVehicleFullDetails()
     {
         string licensePlate = readLicensePlate();
-        Console.WriteLine($"Information about vehicle {licensePlate} : {r_Garage.GetVehicleDetails(licensePlate)}");
+        Console.WriteLine($"Information about vehicle {licensePlate} :\n" + 
+                          $"{r_Garage.GetVehicleDetails(licensePlate)}\n");
     }
 }

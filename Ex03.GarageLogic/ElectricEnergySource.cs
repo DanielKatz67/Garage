@@ -21,7 +21,7 @@ public class ElectricEnergySource : EnergySource
     
     public override string ToString()
     {
-        return $"Electric energy source:" +
+        return $"Electric energy source: \n" +
                $"Maximal charging hours: {base.MaxEnergySourceAmount}, " +
                $"Remaning charging hours: {base.CurrentEnergySourceCapacity}" ;
     }

@@ -36,7 +36,7 @@ public class FuelEnergySource : EnergySource
     
     public override string ToString()
     {
-        return $"Fuel energy source:" +
+        return $"Fuel energy source:\n" +
                $"Maximal fuel capacity: {base.MaxEnergySourceAmount} Liters, " +
                $"Remaning fuel capacity: {base.CurrentEnergySourceCapacity} Liters." ;
     }
