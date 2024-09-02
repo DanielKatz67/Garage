@@ -65,13 +65,13 @@ public abstract class Vehicle
         float? i_MaximalChargeHoursCapacity, VehicleOwner i_VehicleOwner)
     {
         r_LicenseLicensePlate = i_LicensePlate;
-        r_NumberOfWheels = i_NumberOfWheels;
-        r_ModelName = i_ModelName;
-        addWheelsToVehicle(i_WheelsManufacturer, i_WheelsMaximumAirPressure, i_WheelsCurrentAirPressure);
-        updateEnergyRemainingPercentage();
         m_VehicleOwner = i_VehicleOwner;
+        r_ModelName = i_ModelName;
+        r_NumberOfWheels = i_NumberOfWheels;
+        addWheelsToVehicle(i_WheelsManufacturer, i_WheelsMaximumAirPressure, i_WheelsCurrentAirPressure);
         r_EnergySource = createEnergySource(i_EnergySourceType, i_CurrentEnergySourceCapacity, i_FuelType, 
             i_MaximalFuelTankCapacity, i_MaximalChargeHoursCapacity);
+        updateEnergyRemainingPercentage();
     }
     
     private void addWheelsToVehicle(string i_WheelsManufacturer, float i_WheelsMaximumAirPressure, float i_WheelsCurrentAirPressure)
