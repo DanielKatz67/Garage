@@ -33,7 +33,9 @@ public class Wheel
     {
         if (i_AirPressureToAdd + m_CurrentAirPressure > r_MaximumAirPressure || i_AirPressureToAdd < 0.0F)
         {
-            throw new ValueOutOfRangeException(0.0F, r_MaximumAirPressure - m_CurrentAirPressure);
+            
+            
+            throw new ValueOutOfRangeException(0.0F, r_MaximumAirPressure - m_CurrentAirPressure, "Invalid air pressure to add");
         }
         else
         {

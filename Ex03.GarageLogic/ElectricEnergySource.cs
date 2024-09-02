@@ -11,7 +11,8 @@ public class ElectricEnergySource : EnergySource
     {
         if (i_HoursQuantityToAdd + base.CurrentEnergySourceCapacity > base.MaxEnergySourceAmount || i_HoursQuantityToAdd < 0.0F)
         {
-            throw new ValueOutOfRangeException(0.0F, base.MaxEnergySourceAmount - base.CurrentEnergySourceCapacity);
+            float maximalHoursQuantityToAdd = base.MaxEnergySourceAmount - base.CurrentEnergySourceCapacity;
+            throw new ValueOutOfRangeException(0.0F, maximalHoursQuantityToAdd, "Invalid number of hours to charge");
         }
         else
         {

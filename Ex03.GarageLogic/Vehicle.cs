@@ -80,7 +80,7 @@ public abstract class Vehicle
     {
         if (i_WheelsMaximumAirPressure < i_WheelsCurrentAirPressure)
         {
-            throw new ValueOutOfRangeException(0.0F, i_WheelsMaximumAirPressure);
+            throw new ValueOutOfRangeException(0.0F, i_WheelsMaximumAirPressure, "Invalid wheels current air pressure");
         }
         for (int wheelNumber = 0; wheelNumber < r_NumberOfWheels; wheelNumber++)
         {

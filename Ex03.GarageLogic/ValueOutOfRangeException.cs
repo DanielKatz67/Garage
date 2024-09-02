@@ -12,6 +12,13 @@ public class ValueOutOfRangeException : Exception
         this.r_MaxValue = i_MaxValue;
     }
     
+    public ValueOutOfRangeException(float i_MinValue, float i_MaxValue, string i_Message)
+        : base(i_Message + String.Format(" (Valid range: {0} to {1})", i_MinValue, i_MaxValue))
+    {
+        this.r_MinValue = i_MinValue;
+        this.r_MaxValue = i_MaxValue;
+    }
+    
     public float MaxValue
     {
         get { return this.r_MaxValue; }

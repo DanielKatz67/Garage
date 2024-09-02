@@ -26,7 +26,8 @@ public class FuelEnergySource : EnergySource
         }
         else if (i_FuelQuantityToAdd + base.CurrentEnergySourceCapacity > base.MaxEnergySourceAmount || i_FuelQuantityToAdd < 0.0F)
         {
-            throw new ValueOutOfRangeException(0.0F, base.MaxEnergySourceAmount - base.CurrentEnergySourceCapacity);
+            float maximalFuelQuantityToAdd = base.MaxEnergySourceAmount - base.CurrentEnergySourceCapacity;
+            throw new ValueOutOfRangeException(0.0F, maximalFuelQuantityToAdd, "Invalid fuel quantity to add");
         }
         else
         {

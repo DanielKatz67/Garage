@@ -27,8 +27,15 @@ public abstract class EnergySource
 
     public EnergySource(float i_MaximalChargeHoursCapacity, float i_CurrentChargeCapacity)
     {
-        r_MaximalEnergySourceCapacity = i_MaximalChargeHoursCapacity;
-        m_CurrentEnergySourceCapacity = i_CurrentChargeCapacity;
+        if (i_CurrentChargeCapacity > i_MaximalChargeHoursCapacity || i_CurrentChargeCapacity < 0.0F)
+        {
+            throw new ValueOutOfRangeException(0.0F, i_MaximalChargeHoursCapacity, "Invalid current charge capacity");
+        }
+        else
+        {
+            r_MaximalEnergySourceCapacity = i_MaximalChargeHoursCapacity;
+            m_CurrentEnergySourceCapacity = i_CurrentChargeCapacity;
+        }
     }
     
     public override string ToString()
