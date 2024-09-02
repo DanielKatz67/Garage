@@ -135,7 +135,7 @@ public class GarageUI
         string model = readModel();
         string wheelsManufacture = readWheelsManufacture();
         float currentAirPressure = readCurrentAirPressure();
-        eFuelType fuelType = readFuelType();
+
         readMaximalEnergySourceCapacity(energyType ,out float? maximalTankCapacity, out float? maximalChargeCapacity);
 
         if (vehicleType == eVehicleType.Car)
@@ -237,19 +237,7 @@ public class GarageUI
 
         return null;
     }
-
-    private eFuelType readFuelType()
-    {
-        Console.WriteLine("\nEnter fuel type:\n" +
-                            "1.Soler\n" +
-                            "2.Octan95\n" +
-                            "3.Octan96\n" +
-                            "4.Octan98\n" 
-                          );
-        
-        return ParseEnum<eFuelType>(Console.ReadLine());
-    }
-
+    
     private eCarDoorCount readDoorsNumber()
     {
         Console.WriteLine("\nEnter doors number (2/3/4/5):");
