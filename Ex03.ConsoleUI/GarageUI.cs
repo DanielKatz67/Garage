@@ -129,7 +129,8 @@ public class GarageUI
             energyType = eEnergySourceType.Fuel;
         }
 
-        float remainingEnergyPrecentage = readRemainingEnergyPrecentage();
+        float remainingEnergyCapacity = readRemainingEnergyCapacity(energyType);
+        
         VehicleOwner owner = new VehicleOwner();
         assignOwnerDetails(owner);
         string model = readModel();
@@ -141,7 +142,7 @@ public class GarageUI
             eCarColor color = readCarColor();
             eCarDoorCount doorCount = readDoorsNumber();
             return new Car(i_LicensePlate, model, wheelsManufacture, currentAirPressure,
-                                color, doorCount, energyType, remainingEnergyPrecentage, owner);
+                                color, doorCount, energyType, remainingEnergyCapacity, owner);
         }
 
         if (vehicleType == eVehicleType.Truck)
@@ -150,14 +151,14 @@ public class GarageUI
             float trunkCapacity = readTrunkCapacity();
             return new Truck(i_LicensePlate, model, wheelsManufacture, currentAirPressure,
                                 isContainHazardousMaterials, trunkCapacity, energyType, 
-                                remainingEnergyPrecentage, owner);
+                                remainingEnergyCapacity, owner);
         }
 
         eMotorcycleLicenseType licenseType = readLicenseType();
         int engineCapacity = readEngineCapacity();
         return new Motorcycle(i_LicensePlate, model, wheelsManufacture, currentAirPressure,
                                 licenseType, engineCapacity, energyType, 
-                                remainingEnergyPrecentage, owner);
+                                remainingEnergyCapacity, owner);
     }
     
     private int readEngineCapacity()
@@ -255,20 +256,24 @@ public class GarageUI
         return ParseEnum<eEnergySourceType>(Console.ReadLine());
     }
     
-    private float readRemainingEnergyPrecentage()
+    private float readRemainingEnergyCapacity(eEnergySourceType i_EnergyType)
     {
-        Console.WriteLine("\nEnter the remaining energy percentage:");
-        string remainingPercentage = Console.ReadLine();
-        string pattern = @"^(100|[1-9]?[0-9])%$";
-
-        if (System.Text.RegularExpressions.Regex.IsMatch(remainingPercentage, pattern))
+        string energyUnits = i_EnergyType == eEnergySourceType.Electric ? "hours" : "liters";
+        Console.WriteLine($"\nEnter the remaining {i_EnergyType.ToString().ToLower()} in {energyUnits}:");
+        string remainingCapacity = Console.ReadLine();
+        string pattern = @"^\s*\d+(\.\d+)?\s*$";
+        
+        if (System.Text.RegularExpressions.Regex.IsMatch(remainingCapacity, pattern))
         {
-            float percentageValue = float.Parse(remainingPercentage.Substring(0, remainingPercentage.Length - 1));
+            float result = float.Parse(remainingCapacity);
             
-            return percentageValue;
+            if (result > 0)
+            {
+                return result;
+            }
         }
-
-        throw new FormatException("The input must be a valid percentage between 0 and 100, ending with %.");
+        
+        throw new FormatException("Invalid remaining energy capacity input. Please enter a valid positive float number.");
     }
     
     private T ParseEnum<T>(string i_String)
