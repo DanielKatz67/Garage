@@ -231,7 +231,12 @@ public class GarageUI
 
     private eFuelType readFuelType()
     {
-        Console.WriteLine("\nEnter fuel type");
+        Console.WriteLine("\nEnter fuel type:\n" +
+                            "1.Soler\n" +
+                            "2.Octan95\n" +
+                            "3.Octan96\n" +
+                            "4.Octan98\n" 
+                          );
         
         return ParseEnum<eFuelType>(Console.ReadLine());
     }
