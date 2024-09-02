@@ -135,9 +135,7 @@ public class GarageUI
         string model = readModel();
         string wheelsManufacture = readWheelsManufacture();
         float currentAirPressure = readCurrentAirPressure();
-
-        readMaximalEnergySourceCapacity(energyType ,out float? maximalTankCapacity, out float? maximalChargeCapacity);
-
+        
         if (vehicleType == eVehicleType.Car)
         {
             eCarColor color = readCarColor();
@@ -196,46 +194,6 @@ public class GarageUI
         int isContainHazardous = int.Parse(Console.ReadLine());
 
         return (isContainHazardous == 1);
-    }
-
-    private void readMaximalEnergySourceCapacity(eEnergySourceType energyType, out float? o_MaximalTankCapacity, out float? o_MaximalChargeCapacity)
-    {
-        if (energyType is eEnergySourceType.Fuel)
-        {
-            o_MaximalTankCapacity = readMaximalFuelCapacity();
-            o_MaximalChargeCapacity = null;
-        }
-        else
-        {
-            o_MaximalChargeCapacity = readHourlyMaximalChargeCapacity();
-            o_MaximalTankCapacity = null;
-        }
-    }
-    
-    private float? readHourlyMaximalChargeCapacity()
-    {
-        Console.WriteLine("\nEnter hourly maximal charge capacity:");
-        string input = Console.ReadLine();
-
-        if (float.TryParse(input, out float hourlyChargeCapacity))
-        {
-            return hourlyChargeCapacity;
-        }
-
-        return null;
-    }
-
-    private float? readMaximalFuelCapacity()
-    {
-        Console.WriteLine("\nEnter Maximal fuel capacity:");
-        string input = Console.ReadLine();
-
-        if (float.TryParse(input, out float maximalFuelCapacity))
-        {
-            return maximalFuelCapacity;
-        }
-
-        return null;
     }
     
     private eCarDoorCount readDoorsNumber()
