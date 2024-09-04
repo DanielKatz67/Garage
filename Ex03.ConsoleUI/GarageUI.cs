@@ -50,6 +50,13 @@ public class GarageUI
                 Console.WriteLine(e.Message);
             }
         }
+
+        showGoodbyeMessage();
+    }
+
+    private void showGoodbyeMessage()
+    {
+        Console.WriteLine("\nThank you for using the Ultimate Garage Manager. Goodbye!");
     }
 
     private bool tryParseEnum<T>(string input, out T result) where T : struct, Enum
