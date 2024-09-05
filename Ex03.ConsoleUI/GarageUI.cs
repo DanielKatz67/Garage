@@ -35,7 +35,7 @@ public class GarageUI
             try
             {
                 showMenu();
-                if (tryParseEnum<eMenuChoices>(readLineWithMessage(v_IsShowMessage), out eMenuChoices userChoice))
+                if (tryParseEnum<eMenuChoices>(readLineWithMessage(), out eMenuChoices userChoice))
                 {
                     r_MenuActions[userChoice].Invoke();
                 }
@@ -226,7 +226,7 @@ public class GarageUI
     {
         if (isShowMessage)
         {
-            Console.WriteLine("Enter you input here:");
+            Console.WriteLine("\nEnter your input here:");
         }
         string input = Console.ReadLine();
         Console.Clear();
@@ -258,6 +258,7 @@ public class GarageUI
     
     private void assignOwnerDetails(VehicleOwner i_Owner)
     {
+        Console.WriteLine("Owner Details\n");
         Console.WriteLine("Enter owner name:");
         i_Owner.Name = Console.ReadLine();
         Console.WriteLine("\nEnter owner phone:");
