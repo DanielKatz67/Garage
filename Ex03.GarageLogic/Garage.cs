@@ -10,7 +10,7 @@ public class Garage
     {
         if (r_LicensePlateToRegistry.ContainsKey(i_Vehicle.LicensePlate))
         {
-            throw new ArgumentException("A vehicle with this license plate is already registered in the garage.");
+            throw new ArgumentException("A vehicle with this license plate is already registered in the garage.\n");
         }
         
         r_LicensePlateToRegistry[i_Vehicle.LicensePlate] = new GarageRegistry(i_Vehicle, i_Status);
@@ -45,6 +45,7 @@ public class Garage
     public void InflateWheelToMax(string i_LicensePlate)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
+        
         foreach (Wheel wheel in garageRegistry.RegisteredVehcle.Wheels)
         {
             wheel.Inflate(wheel.MaximumAirPressure - wheel.CurrentAirPressure);
@@ -66,6 +67,7 @@ public class Garage
     public Vehicle GetVehicleDetails(string i_LicensePlate)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
+        
         return garageRegistry.RegisteredVehcle;
     }
 
