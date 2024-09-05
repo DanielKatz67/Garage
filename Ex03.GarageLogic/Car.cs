@@ -11,14 +11,13 @@ public class Car : Vehicle
     private const int k_WheelsNumberInCar = 4;
 
     public Car(string i_LicensePlate, string i_ModelName, string i_WheelsManufacturer, 
-        eCarColor i_CarColor, eCarDoorCount i_CarNumberOfDoors, 
-        eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity,
-        eFuelType i_FuelType, float? i_MaximalFuelTankCapacity, 
-        float? i_MaximalChargeHoursCapacity, VehicleOwner i_VehicleOwner)
+            float i_CurrentWheelsAirPressure, eCarColor i_CarColor, eCarDoorCount i_CarNumberOfDoors, 
+            eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity, 
+            VehicleOwner i_VehicleOwner)
         : base(i_LicensePlate, k_WheelsNumberInCar, i_ModelName, i_WheelsManufacturer, 
-            k_MaximumWheelsAirPressure, i_CurrentEnergySourceCapacity,
-            i_EnergySourceType, i_CurrentEnergySourceCapacity, i_FuelType, 
-            i_MaximalFuelTankCapacity, i_MaximalChargeHoursCapacity, i_VehicleOwner)
+            k_MaximumWheelsAirPressure, i_CurrentWheelsAirPressure,
+            i_EnergySourceType, i_CurrentEnergySourceCapacity, k_FuelType, 
+            k_MaximalFuelTankCapacity, k_MaximalChargeHoursCapacity, i_VehicleOwner)
     {
         m_CarColor = i_CarColor;
         r_CarNumberOfDoors = i_CarNumberOfDoors;
@@ -26,8 +25,8 @@ public class Car : Vehicle
     
     public override string ToString()
     {
-        return $"{base.ToString()}, " +
-               $"Color: {m_CarColor}, Number of Doors: {r_CarNumberOfDoors}";
+        return $"{base.ToString()}\n" +
+               $"Color: {m_CarColor}, number of doors: {r_CarNumberOfDoors}\n";
     }
     
 }

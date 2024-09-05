@@ -6,14 +6,14 @@ public class Garage
 {
     private readonly Dictionary<string, GarageRegistry> r_LicensePlateToRegistry = new Dictionary<string, GarageRegistry>();
 
-    public void AssignNewVehicle(string i_LicensePlate, Vehicle i_Vehicle, eVehicleStatus i_Status)
+    public void AssignNewVehicle(Vehicle i_Vehicle, eVehicleStatus i_Status)
     {
-        if (r_LicensePlateToRegistry.ContainsKey(i_LicensePlate))
+        if (r_LicensePlateToRegistry.ContainsKey(i_Vehicle.LicensePlate))
         {
-            throw new ArgumentException("A vehicle with this license plate is already registered in the garage.");
+            throw new ArgumentException("A vehicle with this license plate is already registered in the garage.\n");
         }
         
-        r_LicensePlateToRegistry[i_LicensePlate] = new GarageRegistry(i_Vehicle, i_Status);
+        r_LicensePlateToRegistry[i_Vehicle.LicensePlate] = new GarageRegistry(i_Vehicle, i_Status);
     }
 
     public bool IsVehicleExists(string i_LicensePlate)
@@ -45,7 +45,8 @@ public class Garage
     public void InflateWheelToMax(string i_LicensePlate)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
-        foreach (Wheel wheel in garageRegistry.RegisteredVehcle.Wheels)
+        
+        foreach (Wheel wheel in garageRegistry.RegisteredVehicle.Wheels)
         {
             wheel.Inflate(wheel.MaximumAirPressure - wheel.CurrentAirPressure);
         }
@@ -54,19 +55,20 @@ public class Garage
     public void RefuelVehicle(string i_LicensePlate, eFuelType i_FuelType, float i_FuelQuantityToAdd)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
-        garageRegistry.RegisteredVehcle.RefuelVehicle(i_FuelType, i_FuelQuantityToAdd);
+        garageRegistry.RegisteredVehicle.RefuelVehicle(i_FuelType, i_FuelQuantityToAdd);
     }
 
     public void Charge(string i_LicensePlate, float i_TimeToCharge)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
-        garageRegistry.RegisteredVehcle.ChargeVehicle(i_TimeToCharge);
+        garageRegistry.RegisteredVehicle.ChargeVehicle(i_TimeToCharge);
     }
 
     public Vehicle GetVehicleDetails(string i_LicensePlate)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
-        return garageRegistry.RegisteredVehcle;
+        
+        return garageRegistry.RegisteredVehicle;
     }
 
     private GarageRegistry getRegistry(string i_LicensePlate)

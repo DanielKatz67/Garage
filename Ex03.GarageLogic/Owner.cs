@@ -7,16 +7,27 @@ public class VehicleOwner
     
     public string Name
     {
-        get { return this.m_Name; }
-        set { this.m_Name = value; }
+        get
+        {
+            return this.m_Name;
+        }
+        set
+        {
+            m_Name = value;
+        }
     }
     
     public string PhoneNumber
     {
-        get { return this.m_PhoneNumber; }
-        set { this.m_PhoneNumber = value; }
+        get
+        {
+            return this.m_PhoneNumber;
+        }
+        set
+        {
+            m_PhoneNumber = value;
+        }
     }
-
     
     public override string ToString()
     {

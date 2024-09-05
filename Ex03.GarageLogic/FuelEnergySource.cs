@@ -26,7 +26,9 @@ public class FuelEnergySource : EnergySource
         }
         else if (i_FuelQuantityToAdd + base.CurrentEnergySourceCapacity > base.MaxEnergySourceAmount || i_FuelQuantityToAdd < 0.0F)
         {
-            throw new ValueOutOfRangeException(0.0F, base.MaxEnergySourceAmount - base.CurrentEnergySourceCapacity);
+            float maximalFuelQuantityToAdd = base.MaxEnergySourceAmount - base.CurrentEnergySourceCapacity;
+            
+            throw new ValueOutOfRangeException(0.0F, maximalFuelQuantityToAdd, "Invalid fuel quantity to add");
         }
         else
         {
@@ -36,7 +38,7 @@ public class FuelEnergySource : EnergySource
     
     public override string ToString()
     {
-        return $"Fuel energy source:" +
+        return $"Fuel energy source:\n" +
                $"Maximal fuel capacity: {base.MaxEnergySourceAmount} Liters, " +
                $"Remaning fuel capacity: {base.CurrentEnergySourceCapacity} Liters." ;
     }

@@ -33,7 +33,7 @@ public class Wheel
     {
         if (i_AirPressureToAdd + m_CurrentAirPressure > r_MaximumAirPressure || i_AirPressureToAdd < 0.0F)
         {
-            throw new ValueOutOfRangeException(0.0F, r_MaximumAirPressure - m_CurrentAirPressure);
+            throw new ValueOutOfRangeException(0.0F, r_MaximumAirPressure - m_CurrentAirPressure, "Invalid air pressure to add");
         }
         else
         {
@@ -43,6 +43,6 @@ public class Wheel
 
     public override string ToString()
     {
-        return $"Manufacture Name: {r_Manufacturer}, Max Air Pressure: {r_MaximumAirPressure}, Current Air Pressure: {m_CurrentAirPressure}";
+        return $"Manufacture name: {r_Manufacturer}, max air pressure: {r_MaximumAirPressure}, current air pressure: {m_CurrentAirPressure}";
     }
 }
