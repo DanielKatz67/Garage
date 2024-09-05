@@ -8,6 +8,7 @@ public class GarageUI
     private bool m_IsRunning;
     private readonly Garage r_Garage;
     private readonly Dictionary<eMenuChoices, Action> r_MenuActions;
+    private readonly string r_Menu;
     private const bool v_IsShowMessage = true;
 
     public GarageUI()
@@ -25,6 +26,7 @@ public class GarageUI
             { eMenuChoices.ShowVehicleFullDetails, showVehicleFullDetails },
             { eMenuChoices.Exit, () => m_IsRunning = false }
         };
+        r_Menu = buildMenu();
     }
     
     public void Run()
@@ -88,6 +90,11 @@ public class GarageUI
     
     private void showMenu()
     {
+        Console.Write(r_Menu);
+    }
+
+    private string buildMenu()
+    {
         StringBuilder menuBuilder = new StringBuilder();
 
         menuBuilder.AppendLine($"Main Menu:");
@@ -102,7 +109,7 @@ public class GarageUI
         menuBuilder.AppendLine();
         menuBuilder.AppendLine($"Enter your choice from the following (1-{r_MenuActions.Count}):");
 
-        Console.Write(menuBuilder);
+        return menuBuilder.ToString();
     }
     
     private void insertVehicleToGarage()
@@ -117,7 +124,7 @@ public class GarageUI
         {
             Vehicle vehicle = generateVehicle(licensePlate);
             r_Garage.AssignNewVehicle(vehicle, eVehicleStatus.InRepair);
-            Console.WriteLine("The vehicle now is in the Garage");
+            Console.WriteLine("The vehicle now is in the Garage\n");
         }
     }
 
@@ -346,7 +353,7 @@ public class GarageUI
         }
         else
         {
-            Console.WriteLine("No license plates found with the given status.");
+            Console.WriteLine("No license plates found with the given status.\n");
         }
     }
 
@@ -370,14 +377,14 @@ public class GarageUI
                           "3. Paid\n");
         eVehicleStatus newStatus = ParseEnum<eVehicleStatus>(readLineWithMessage(v_IsShowMessage));
         r_Garage.SetStatus(licensePlate, newStatus);
-        Console.WriteLine($"Successfully updated status to {newStatus}");
+        Console.WriteLine($"Successfully updated status to {newStatus}\n");
     }
 
     private void inflateWheelsToMax()
     {
         string licensePlate = readLicensePlate();
         r_Garage.InflateWheelToMax(licensePlate);
-        Console.WriteLine("Inflated wheels to max!");
+        Console.WriteLine("Inflated wheels to max!\n");
     }
 
     private void refuelVehicle()
@@ -392,7 +399,7 @@ public class GarageUI
                           "4. Octan98\n");
         eFuelType fuelType = ParseEnum<eFuelType>(readLineWithMessage(v_IsShowMessage));
         r_Garage.RefuelVehicle(licensePlate, fuelType, fuelAmount);
-        Console.WriteLine($"Successfully refueled by {fuelAmount} liters");
+        Console.WriteLine($"Successfully refueled by {fuelAmount} liters\n");
     }
 
     private void chargeVehicleBattery()
