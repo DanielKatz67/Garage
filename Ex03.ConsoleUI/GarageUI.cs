@@ -8,6 +8,7 @@ public class GarageUI
     private bool m_IsRunning;
     private readonly Garage r_Garage;
     private readonly Dictionary<eMenuChoices, Action> r_MenuActions;
+    private const bool v_IsShowMessage = true;
 
     public GarageUI()
     {
@@ -34,14 +35,12 @@ public class GarageUI
             try
             {
                 showMenu();
-                if (tryParseEnum<eMenuChoices>(Console.ReadLine(), out eMenuChoices userChoice))
+                if (tryParseEnum<eMenuChoices>(readLineWithMessage(v_IsShowMessage), out eMenuChoices userChoice))
                 {
-                    Console.Clear();
                     r_MenuActions[userChoice].Invoke();
                 }
                 else
                 {
-                    Console.Clear();
                     Console.WriteLine("Inserted invalid choice");
                 }
             }
@@ -82,15 +81,15 @@ public class GarageUI
     {
         StringBuilder welcomeBuilder = new StringBuilder();
         welcomeBuilder.AppendLine("** Welcome to the Ultimate Garage Manager! **");
-        welcomeBuilder.AppendLine("We are here to help you manage your vehicles efficiently and effectively.");
+        welcomeBuilder.AppendLine("We are here to help you manage your vehicles efficiently and effectively.\n");
         Console.Write(welcomeBuilder);
+        
     }
     
     private void showMenu()
     {
         StringBuilder menuBuilder = new StringBuilder();
 
-        menuBuilder.AppendLine();
         menuBuilder.AppendLine($"Main Menu:");
         menuBuilder.AppendLine("1. Enter a vehicle to the garage");
         menuBuilder.AppendLine("2. Show license plates by status");
@@ -171,7 +170,7 @@ public class GarageUI
     private int readEngineCapacity()
     {
         Console.WriteLine("\nEnter engine capacity:");
-        return int.Parse(Console.ReadLine());
+        return int.Parse(readLineWithMessage());
     }
     
     private eMotorcycleLicenseType readLicenseType()
@@ -183,14 +182,14 @@ public class GarageUI
                                     "4. B\n"
         );
         
-        return ParseEnum<eMotorcycleLicenseType>(Console.ReadLine());
+        return ParseEnum<eMotorcycleLicenseType>(readLineWithMessage(v_IsShowMessage));
     }
 
     private float readTrunkCapacity()
     {
         Console.WriteLine("\nEnter truck's trunk capacity :");
         
-        return float.Parse(Console.ReadLine());
+        return float.Parse(readLineWithMessage());
     }
 
     private bool readIsContainHazardousMaterials()
@@ -199,7 +198,7 @@ public class GarageUI
                                     "1.Yes\n" +
                                     "2.No\n" 
                                     );
-        int isContainHazardous = int.Parse(Console.ReadLine());
+        int isContainHazardous = int.Parse(readLineWithMessage(v_IsShowMessage));
 
         return (isContainHazardous == 1);
     }
@@ -208,7 +207,7 @@ public class GarageUI
     {
         Console.WriteLine("\nEnter doors number (2/3/4/5):");
         
-        return ParseEnum<eCarDoorCount>(Console.ReadLine());
+        return ParseEnum<eCarDoorCount>(readLineWithMessage());
     }
     
     private eCarColor readCarColor()
@@ -217,16 +216,28 @@ public class GarageUI
                             "1. Blue\n" +
                             "2. White\n" +
                             "3. Black\n"+
-                            "4. Red\n"
+                            "4. Red"
                         );
      
-        return ParseEnum<eCarColor>(Console.ReadLine());
+        return ParseEnum<eCarColor>(readLineWithMessage(v_IsShowMessage));
+    }
+
+    private string readLineWithMessage(bool isShowMessage = false)
+    {
+        if (isShowMessage)
+        {
+            Console.WriteLine("\nEnter you input here:");
+        }
+        string input = Console.ReadLine();
+        Console.Clear();
+
+        return input;
     }
     
     private float readCurrentAirPressure()
     {
         Console.WriteLine("\nEnter wheels current air pressure:");
-        float userCurrentAirPressure = float.Parse(Console.ReadLine());
+        float userCurrentAirPressure = float.Parse(readLineWithMessage());
         
         return userCurrentAirPressure;
     }
@@ -235,14 +246,14 @@ public class GarageUI
     {
         Console.WriteLine("\nEnter vehicle wheels manufacture:");
         
-        return Console.ReadLine();
+        return readLineWithMessage();
     }
     
     private string? readModel()
     {
         Console.WriteLine("\nEnter model:");
         
-        return Console.ReadLine();
+        return readLineWithMessage();
     }
     
     private void assignOwnerDetails(VehicleOwner i_Owner)
@@ -250,7 +261,7 @@ public class GarageUI
         Console.WriteLine("\nEnter owner name:");
         i_Owner.Name = Console.ReadLine();
         Console.WriteLine("\nEnter owner phone:");
-        i_Owner.PhoneNumber = Console.ReadLine();
+        i_Owner.PhoneNumber = readLineWithMessage();
     }
     
     private eEnergySourceType readEnergyType()
@@ -260,14 +271,14 @@ public class GarageUI
                           "2.Electric"
         );
         
-        return ParseEnum<eEnergySourceType>(Console.ReadLine());
+        return ParseEnum<eEnergySourceType>(readLineWithMessage(v_IsShowMessage));
     }
     
     private float readRemainingEnergyCapacity(eEnergySourceType i_EnergyType)
     {
         string energyUnits = i_EnergyType == eEnergySourceType.Electric ? "hours" : "liters";
         Console.WriteLine($"\nEnter the remaining {i_EnergyType.ToString().ToLower()} in {energyUnits}:");
-        string remainingCapacity = Console.ReadLine();
+        string remainingCapacity = readLineWithMessage();
         string pattern = @"^\s*\d+(\.\d+)?\s*$";
         
         if (System.Text.RegularExpressions.Regex.IsMatch(remainingCapacity, pattern))
@@ -280,7 +291,7 @@ public class GarageUI
             }
         }
         
-        throw new FormatException("Invalid remaining energy capacity input. Please enter a valid positive float number.");
+        throw new FormatException("Invalid remaining energy capacity input. Please enter a valid positive float number."); //TODO
     }
     
     private T ParseEnum<T>(string i_String)
@@ -305,14 +316,14 @@ public class GarageUI
                           "2. Car\n" +
                           "3. Truck");
         
-        return ParseEnum<eVehicleType>(Console.ReadLine());
+        return ParseEnum<eVehicleType>(readLineWithMessage(v_IsShowMessage));
     }
 
     private string readLicensePlate()
     {
         Console.WriteLine("Enter License Plate:");
         
-        return Console.ReadLine();
+        return readLineWithMessage();
     }
     
     private void showLicensePlates()
@@ -322,7 +333,7 @@ public class GarageUI
                           "2. Repaired and waiting for payment\n" +
                           "3. Paid\n" +
                           "4. All licenses\n");
-        string input = Console.ReadLine();
+        string input = readLineWithMessage(v_IsShowMessage);
         List<string> licensePlates = getLicensePlates(input);
         if (licensePlates.Count > 0)
         {
@@ -356,7 +367,7 @@ public class GarageUI
                           "1. In Repair\n" +
                           "2. Repaired and waiting for payment\n" +
                           "3. Paid\n");
-        eVehicleStatus newStatus = ParseEnum<eVehicleStatus>(Console.ReadLine());
+        eVehicleStatus newStatus = ParseEnum<eVehicleStatus>(readLineWithMessage(v_IsShowMessage));
         r_Garage.SetStatus(licensePlate, newStatus);
     }
 
@@ -376,7 +387,7 @@ public class GarageUI
                           "2. Octan95\n" +
                           "3. Octan96\n" +
                           "4. Octan98\n");
-        eFuelType fuelType = ParseEnum<eFuelType>(Console.ReadLine());
+        eFuelType fuelType = ParseEnum<eFuelType>(readLineWithMessage(v_IsShowMessage));
         r_Garage.RefuelVehicle(licensePlate, fuelType, fuelAmount);
     }
 
@@ -384,7 +395,7 @@ public class GarageUI
     {
         string licensePlate = readLicensePlate();
         Console.WriteLine("How many hours to charge?");
-        float hoursToCharge = float.Parse(Console.ReadLine());
+        float hoursToCharge = float.Parse(readLineWithMessage());
         r_Garage.Charge(licensePlate, hoursToCharge);
     }
 
