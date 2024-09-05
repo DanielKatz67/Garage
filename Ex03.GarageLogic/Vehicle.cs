@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic;
 
 public abstract class Vehicle
 {
-    private readonly string r_LicenseLicensePlate;
+    private readonly string r_LicensePlate;
     private readonly int r_NumberOfWheels;
     private readonly List<Wheel> r_Wheels = new List<Wheel>();
     private readonly string r_ModelName;
@@ -12,11 +12,11 @@ public abstract class Vehicle
     private float m_EnergyRemaningPrecentage;
     private VehicleOwner m_VehicleOwner = new VehicleOwner();
     
-    public string LicenseLicensePlate
+    public string LicensePlate
     {
         get
         {
-            return r_LicenseLicensePlate;
+            return r_LicensePlate;
         }
     }
 
@@ -66,7 +66,7 @@ public abstract class Vehicle
         eFuelType? i_FuelType, float? i_MaximalFuelTankCapacity, 
         float? i_MaximalChargeHoursCapacity, VehicleOwner i_VehicleOwner)
     {
-        r_LicenseLicensePlate = i_LicensePlate;
+        r_LicensePlate = i_LicensePlate;
         m_VehicleOwner = i_VehicleOwner;
         r_ModelName = i_ModelName;
         r_NumberOfWheels = i_NumberOfWheels;
@@ -158,7 +158,7 @@ public abstract class Vehicle
     
     public override string ToString()
     {
-        return $"License plate: {r_LicenseLicensePlate}, model: {r_ModelName}.\n" +
+        return $"License plate: {r_LicensePlate}, model: {r_ModelName}.\n" +
                $"Number of wheels: {r_NumberOfWheels}, wheels info:\n" +
                $"{printWheels()}\n" + 
                $"Energy source: {r_EnergySource}\n" +

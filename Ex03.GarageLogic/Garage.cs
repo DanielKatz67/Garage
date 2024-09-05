@@ -6,14 +6,14 @@ public class Garage
 {
     private readonly Dictionary<string, GarageRegistry> r_LicensePlateToRegistry = new Dictionary<string, GarageRegistry>();
 
-    public void AssignNewVehicle(string i_LicensePlate, Vehicle i_Vehicle, eVehicleStatus i_Status)
+    public void AssignNewVehicle(Vehicle i_Vehicle, eVehicleStatus i_Status)
     {
-        if (r_LicensePlateToRegistry.ContainsKey(i_LicensePlate))
+        if (r_LicensePlateToRegistry.ContainsKey(i_Vehicle.LicensePlate))
         {
             throw new ArgumentException("A vehicle with this license plate is already registered in the garage.");
         }
         
-        r_LicensePlateToRegistry[i_LicensePlate] = new GarageRegistry(i_Vehicle, i_Status);
+        r_LicensePlateToRegistry[i_Vehicle.LicensePlate] = new GarageRegistry(i_Vehicle, i_Status);
     }
 
     public bool IsVehicleExists(string i_LicensePlate)

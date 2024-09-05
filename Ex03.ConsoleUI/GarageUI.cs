@@ -117,7 +117,7 @@ public class GarageUI
         else
         {
             Vehicle vehicle = generateVehicle(licensePlate);
-            r_Garage.AssignNewVehicle(vehicle.LicenseLicensePlate, vehicle, eVehicleStatus.InRepair);
+            r_Garage.AssignNewVehicle(vehicle, eVehicleStatus.InRepair);
             Console.WriteLine("\nThe vehicle now is in the Garage");
         }
     }
