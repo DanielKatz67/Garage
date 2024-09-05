@@ -46,7 +46,7 @@ public class Garage
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
         
-        foreach (Wheel wheel in garageRegistry.RegisteredVehcle.Wheels)
+        foreach (Wheel wheel in garageRegistry.RegisteredVehicle.Wheels)
         {
             wheel.Inflate(wheel.MaximumAirPressure - wheel.CurrentAirPressure);
         }
@@ -55,20 +55,20 @@ public class Garage
     public void RefuelVehicle(string i_LicensePlate, eFuelType i_FuelType, float i_FuelQuantityToAdd)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
-        garageRegistry.RegisteredVehcle.RefuelVehicle(i_FuelType, i_FuelQuantityToAdd);
+        garageRegistry.RegisteredVehicle.RefuelVehicle(i_FuelType, i_FuelQuantityToAdd);
     }
 
     public void Charge(string i_LicensePlate, float i_TimeToCharge)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
-        garageRegistry.RegisteredVehcle.ChargeVehicle(i_TimeToCharge);
+        garageRegistry.RegisteredVehicle.ChargeVehicle(i_TimeToCharge);
     }
 
     public Vehicle GetVehicleDetails(string i_LicensePlate)
     {
         GarageRegistry garageRegistry = getRegistry(i_LicensePlate);
         
-        return garageRegistry.RegisteredVehcle;
+        return garageRegistry.RegisteredVehicle;
     }
 
     private GarageRegistry getRegistry(string i_LicensePlate)

@@ -2,14 +2,14 @@ namespace Ex03.GarageLogic;
 
 public class GarageRegistry
 {
-    private readonly Vehicle r_RegisteredVehcle;
+    private readonly Vehicle r_RegisteredVehicle;
     private eVehicleStatus m_VehicleStatus;
 
-    public Vehicle RegisteredVehcle
+    public Vehicle RegisteredVehicle
     {
         get
         {
-            return r_RegisteredVehcle;
+            return r_RegisteredVehicle;
         }
     }
     
@@ -25,9 +25,9 @@ public class GarageRegistry
         }
     }
 
-    public GarageRegistry(Vehicle iRegisteredVehcle, eVehicleStatus iVehicleStatus)
+    public GarageRegistry(Vehicle i_RegisteredVehicle, eVehicleStatus i_VehicleStatus)
     {
-        r_RegisteredVehcle = iRegisteredVehcle;
-        m_VehicleStatus = iVehicleStatus;
+        r_RegisteredVehicle = i_RegisteredVehicle;
+        m_VehicleStatus = i_VehicleStatus;
     }
 }
