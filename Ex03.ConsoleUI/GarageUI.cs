@@ -9,7 +9,7 @@ public class GarageUI
     private readonly Garage r_Garage;
     private readonly Dictionary<eMenuChoices, Action> r_MenuActions;
     private readonly string r_Menu;
-    private const bool v_IsShowMessage = true;
+    private const bool k_IsShowMessage = true;
 
     public GarageUI()
     {
@@ -60,19 +60,19 @@ public class GarageUI
         Console.WriteLine("Thank you for using the Ultimate Garage Manager. Goodbye!");
     }
 
-    private bool tryParseEnum<T>(string input, out T result) where T : struct, Enum
+    private bool tryParseEnum<T>(string i_Input, out T o_Result) where T : struct, Enum
     {
-        result = default;
+        o_Result = default;
 
-        if (int.TryParse(input, out int intValue) && Enum.IsDefined(typeof(T), intValue))
+        if (int.TryParse(i_Input, out int intValue) && Enum.IsDefined(typeof(T), intValue))
         {
-            result = (T)Enum.ToObject(typeof(T), intValue);
+            o_Result = (T)Enum.ToObject(typeof(T), intValue);
             return true;
         }
 
-        if (Enum.TryParse(input, true, out T enumValue) && Enum.IsDefined(typeof(T), enumValue))
+        if (Enum.TryParse(i_Input, true, out T enumValue) && Enum.IsDefined(typeof(T), enumValue))
         {
-            result = enumValue;
+            o_Result = enumValue;
             return true;
         }
 
@@ -115,6 +115,7 @@ public class GarageUI
     private void insertVehicleToGarage()
     {
         string licensePlate = readLicensePlate();
+        
         if (r_Garage.IsVehicleExists(licensePlate))
         {
             Console.WriteLine("This vehicle already exists, updating status to In Repair");
@@ -169,6 +170,7 @@ public class GarageUI
 
         eMotorcycleLicenseType licenseType = readLicenseType();
         int engineCapacity = readEngineCapacity();
+        
         return new Motorcycle(i_LicensePlate, model, wheelsManufacture, currentAirPressure,
                                 licenseType, engineCapacity, energyType, 
                                 remainingEnergyCapacity, owner);
@@ -177,6 +179,7 @@ public class GarageUI
     private int readEngineCapacity()
     {
         Console.WriteLine("Enter engine capacity:");
+        
         return int.Parse(readLineWithMessage());
     }
     
@@ -189,7 +192,7 @@ public class GarageUI
                                     "4. B"
         );
         
-        return ParseEnum<eMotorcycleLicenseType>(readLineWithMessage(v_IsShowMessage));
+        return ParseEnum<eMotorcycleLicenseType>(readLineWithMessage(k_IsShowMessage));
     }
 
     private float readTrunkCapacity()
@@ -205,7 +208,7 @@ public class GarageUI
                                     "1.Yes\n" +
                                     "2.No" 
                                     );
-        int isContainHazardous = int.Parse(readLineWithMessage(v_IsShowMessage));
+        int isContainHazardous = int.Parse(readLineWithMessage(k_IsShowMessage));
 
         return (isContainHazardous == 1);
     }
@@ -226,15 +229,16 @@ public class GarageUI
                             "4. Red"
                         );
      
-        return ParseEnum<eCarColor>(readLineWithMessage(v_IsShowMessage));
+        return ParseEnum<eCarColor>(readLineWithMessage(k_IsShowMessage));
     }
 
-    private string readLineWithMessage(bool isShowMessage = false)
+    private string readLineWithMessage(bool i_IsShowMessage = false)
     {
-        if (isShowMessage)
+        if (i_IsShowMessage)
         {
             Console.WriteLine("\nEnter your input here:");
         }
+        
         string input = Console.ReadLine();
         Console.Clear();
 
@@ -279,7 +283,7 @@ public class GarageUI
                           "2.Electric"
         );
         
-        return ParseEnum<eEnergySourceType>(readLineWithMessage(v_IsShowMessage));
+        return ParseEnum<eEnergySourceType>(readLineWithMessage(k_IsShowMessage));
     }
     
     private float readRemainingEnergyCapacity(eEnergySourceType i_EnergyType)
@@ -324,7 +328,7 @@ public class GarageUI
                           "2. Car\n" +
                           "3. Truck");
         
-        return ParseEnum<eVehicleType>(readLineWithMessage(v_IsShowMessage));
+        return ParseEnum<eVehicleType>(readLineWithMessage(k_IsShowMessage));
     }
 
     private string readLicensePlate()
@@ -341,11 +345,13 @@ public class GarageUI
                           "2. Repaired and waiting for payment\n" +
                           "3. Paid\n" +
                           "4. All licenses\n");
-        string input = readLineWithMessage(v_IsShowMessage);
+        string input = readLineWithMessage(k_IsShowMessage);
         List<string> licensePlates = getLicensePlates(input);
+        
         if (licensePlates.Count > 0)
         {
             Console.WriteLine("License Plates:");
+            
             foreach (string licensePlate in licensePlates)
             {
                 Console.WriteLine($"- {licensePlate}");
@@ -365,6 +371,7 @@ public class GarageUI
         }
 
         eVehicleStatus status = ParseEnum<eVehicleStatus>(i_Filter);
+        
         return r_Garage.SearchLicensePlates(status);            
     }
 
@@ -375,7 +382,7 @@ public class GarageUI
                           "1. In Repair\n" +
                           "2. Repaired and waiting for payment\n" +
                           "3. Paid\n");
-        eVehicleStatus newStatus = ParseEnum<eVehicleStatus>(readLineWithMessage(v_IsShowMessage));
+        eVehicleStatus newStatus = ParseEnum<eVehicleStatus>(readLineWithMessage(k_IsShowMessage));
         r_Garage.SetStatus(licensePlate, newStatus);
         Console.WriteLine($"Successfully updated status to {newStatus}\n");
     }
@@ -397,7 +404,7 @@ public class GarageUI
                           "2. Octan95\n" +
                           "3. Octan96\n" +
                           "4. Octan98\n");
-        eFuelType fuelType = ParseEnum<eFuelType>(readLineWithMessage(v_IsShowMessage));
+        eFuelType fuelType = ParseEnum<eFuelType>(readLineWithMessage(k_IsShowMessage));
         r_Garage.RefuelVehicle(licensePlate, fuelType, fuelAmount);
         Console.WriteLine($"Successfully refueled by {fuelAmount} liters\n");
     }
