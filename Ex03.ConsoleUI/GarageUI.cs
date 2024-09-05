@@ -370,12 +370,14 @@ public class GarageUI
                           "3. Paid\n");
         eVehicleStatus newStatus = ParseEnum<eVehicleStatus>(readLineWithMessage(v_IsShowMessage));
         r_Garage.SetStatus(licensePlate, newStatus);
+        Console.WriteLine($"Successfully updated status to {newStatus}");
     }
 
     private void inflateWheelsToMax()
     {
         string licensePlate = readLicensePlate();
         r_Garage.InflateWheelToMax(licensePlate);
+        Console.WriteLine("Inflated wheels to max!");
     }
 
     private void refuelVehicle()
@@ -390,6 +392,7 @@ public class GarageUI
                           "4. Octan98\n");
         eFuelType fuelType = ParseEnum<eFuelType>(readLineWithMessage(v_IsShowMessage));
         r_Garage.RefuelVehicle(licensePlate, fuelType, fuelAmount);
+        Console.WriteLine($"Successfully refueled by {fuelAmount} liters");
     }
 
     private void chargeVehicleBattery()
@@ -398,6 +401,7 @@ public class GarageUI
         Console.WriteLine("How many hours to charge?");
         float hoursToCharge = float.Parse(readLineWithMessage());
         r_Garage.Charge(licensePlate, hoursToCharge);
+        Console.WriteLine($"Successfully charged by {hoursToCharge} hours");
     }
 
     private void showVehicleFullDetails()

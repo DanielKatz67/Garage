@@ -25,7 +25,7 @@ public class Motorcycle : Vehicle
     
     public override string ToString()
     {
-        return $"{base.ToString()},\n" +
+        return $"{base.ToString()}\n" +
                $"Motorcycle license type: {m_MotorcycleLicenseType}, engine capacity: {m_EngineCapacity}\n";
     }
 }
