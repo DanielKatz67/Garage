@@ -21,10 +21,16 @@ public class ValueOutOfRangeException : Exception
     
     public float MaxValue
     {
-        get { return this.r_MaxValue; }
+        get
+        {
+            return r_MaxValue;
+        }
     }
     public float MinValue
     {
-        get { return this.r_MinValue; }
+        get
+        {
+            return r_MinValue;
+        }
     }
 }

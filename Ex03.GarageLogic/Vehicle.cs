@@ -82,6 +82,7 @@ public abstract class Vehicle
         {
             throw new ValueOutOfRangeException(0.0F, i_WheelsMaximumAirPressure, "Invalid wheels current air pressure");
         }
+        
         for (int wheelNumber = 0; wheelNumber < r_NumberOfWheels; wheelNumber++)
         {
             r_Wheels.Add(new Wheel(i_WheelsManufacturer, i_WheelsMaximumAirPressure, i_WheelsCurrentAirPressure));
@@ -96,6 +97,8 @@ public abstract class Vehicle
     protected EnergySource createEnergySource(eEnergySourceType i_EnergySourceType, float i_CurrentEnergySourceCapacity,
         eFuelType? i_FuelType, float? i_MaximalFuelTankCapacity, float? i_MaximalChargeHoursCapacity)
     {
+        EnergySource energySource;
+        
         switch (i_EnergySourceType)
         {
             case eEnergySourceType.Fuel:
@@ -103,18 +106,24 @@ public abstract class Vehicle
                 {
                     throw new ArgumentException("Fuel type and fuel tank capacity must be provided for fuel energy source.");
                 }
-                return new FuelEnergySource(i_FuelType.Value, i_MaximalFuelTankCapacity.Value, i_CurrentEnergySourceCapacity);
+                
+                energySource = new FuelEnergySource(i_FuelType.Value, i_MaximalFuelTankCapacity.Value, i_CurrentEnergySourceCapacity);
+                break;
 
             case eEnergySourceType.Electric:
                 if (i_MaximalChargeHoursCapacity == null)
                 {
                     throw new ArgumentException("Maximal charge hours capacity must be provided for electric energy source.");
                 }
-                return new ElectricEnergySource(i_MaximalChargeHoursCapacity.Value, i_CurrentEnergySourceCapacity);
+                
+                energySource = new ElectricEnergySource(i_MaximalChargeHoursCapacity.Value, i_CurrentEnergySourceCapacity);
+                break;
 
             default:
                 throw new ArgumentException("Invalid energy source type");
         }
+
+        return energySource;
     }
     
     public void RefuelVehicle(eFuelType i_FuelType, float i_FuelQuantityToAdd)
@@ -147,6 +156,7 @@ public abstract class Vehicle
     {
         StringBuilder wheelsString = new StringBuilder();
         int wheelNumber = 1;
+        
         foreach (Wheel wheel in r_Wheels)
         {
             wheelsString.Append($"Wheel number {wheelNumber}: {wheel}.\n");
