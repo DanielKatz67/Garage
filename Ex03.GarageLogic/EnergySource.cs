@@ -29,7 +29,7 @@ public abstract class EnergySource
     {
         if (i_CurrentChargeCapacity > i_MaximalChargeHoursCapacity || i_CurrentChargeCapacity < 0.0F)
         {
-            throw new ValueOutOfRangeException(0.0F, i_MaximalChargeHoursCapacity, "Invalid current charge capacity");
+            throw new ValueOutOfRangeException(0.0F, i_MaximalChargeHoursCapacity, "Invalid current energy source capacity");
         }
         else
         {
